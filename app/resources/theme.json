@@ -1,0 +1,42 @@
+{
+  "text": {
+    "regular": "16px"
+  },
+
+  "font": {
+    "accent": "\"jaf-bernina-sans\", \"freight-text-pro\", \"Georgia\", \"Cambria\", \"Times New Roman\", \"Times\", serif",
+    "sans-serif": "\"freight-text-pro\", \"Georgia\", \"Cambria\", \"Times New Roman\", \"Times\", serif",
+    "serif": "\"freight-sans-pro\", \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", \"Geneva\", \"Verdana\", sans-serif"
+  },
+
+  "black": "#1a1a1a",
+  "white": "#fff",
+  "offwhite": "#eee",
+  "dark-accent": "#e7e6dd",
+
+  "brand": {
+    "primary": "#00D9E8",
+    "success": "#5cb85c",
+    "info": "#5bc0de",
+    "warning": "#f0ad4e",
+    "danger": " #d9534f"
+  },
+
+  "priority": {
+    "low": -1,
+    "medium": 900,
+    "high": 1000
+  },
+
+  "speed": {
+    "slow": "400ms",
+    "medium": "300ms",
+    "fast": "200ms"
+  },
+
+  "transparency": {
+    "opaque": 1,
+    "translucent": 0.6,
+    "transparent": 0
+  }
+}

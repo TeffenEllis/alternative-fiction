@@ -1,0 +1,20 @@
+{
+  "cleanPastedHTML": true,
+  "disableDoubleReturn": true,
+  "firstHeader": "h1",
+  "secondHeader": "h2",
+  "buttons": [
+    "bold",
+    "italic",
+    "underline",
+    "quote",
+    "header1",
+    "header2"
+  ],
+
+  "buttonLabels": {
+    "bold": "<span class='glyphicon glyphicon-bold'></span>",
+    "italic": "<span class='glyphicon glyphicon-italic'></span>",
+    "bold": "<span class='glyphicon glyphicon-bold'></span>"
+  }
+}

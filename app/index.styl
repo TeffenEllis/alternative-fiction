@@ -1,0 +1,48 @@
+json("./resources/theme.json")
+
+$icon-font-path = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/"
+
+html, body, main
+ height: 100%
+
+body
+  background white
+
+  color black
+  font-family font-sans-serif
+  font-size text-regular
+  font-smoothing antialiased
+  font-variant-ligatures common-ligatures
+  line-height 1.45
+
+  user-select none
+
+.mask
+  display: block
+  visibility: hidden
+
+  position: fixed
+  top: 0
+  left: 0
+  z-index: priority-medium
+
+  width: 100%
+  height: 100%
+
+  body.disabled &
+    visibility: visible
+
+[data-component], header, section, aside, footer
+  display flex
+  flex-direction: column
+  align-items: stretch
+  flex-shrink: 0
+
+body [data-selectable]
+  user-select text
+
+::selection
+  background: brand-primary
+
+::-moz-selection
+  background: brand-primary
