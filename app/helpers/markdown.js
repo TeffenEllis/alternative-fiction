@@ -1,3 +1,11 @@
 import Remarkable from "remarkable"
 
-export default new Remarkable({})
+let md = new Remarkable()
+
+md.block.ruler.disable([
+  "list",
+  "hr",
+  "table"
+])
+
+export default md
