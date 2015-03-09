@@ -1,12 +1,14 @@
+require("./site-navigation.styl")
+
 import React from "react"
 import {Link} from "react-router"
 
 export default React.createClass({
   render() {
-    return <nav className="site-navigation no-print">
-      <div className="list-group">
+    return <nav data-component="site-navigation" className="no-print">
+      <section className="list-group">
         {this.renderItems()}
-      </div>
+      </section>
     </nav>
   },
 

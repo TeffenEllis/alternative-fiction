@@ -1,11 +1,13 @@
+require("./story.styl")
+
 import React from "react"
-import HumanTime from "../../common/human-time"
-import EstimatedReadingTime from "../../common/estimated-reading-time"
-import ViewControls from "../view-controls"
-import FullscreenToggle from "../view-controls/fullscreen-toggle"
-import ReadingPreferences from "../view-controls/reading-preferences"
-import userPreferences from "../../helpers/user-preferences"
-import markdown from "../../helpers/markdown"
+import HumanTime from "common/human-time"
+import EstimatedReadingTime from "common/estimated-reading-time"
+import ViewControls from "stories/view-controls"
+import FullscreenToggle from "stories/view-controls/fullscreen-toggle"
+import ReadingPreferences from "stories/view-controls/reading-preferences"
+import userPreferences from "helpers/user-preferences"
+import markdown from "helpers/markdown"
 
 export default React.createClass({
   componentDidMount() {
@@ -18,7 +20,7 @@ export default React.createClass({
       {fontSize, paragraphWidth} = userPreferences.stories,
       story = this.props.story
 
-    return <section className="story">
+    return <section data-component="story" data-component-mode="view">
       <ViewControls
         primaryControls={[
           <EstimatedReadingTime textComponent={this.refs.body} trackScrollPosition />,
@@ -30,8 +32,8 @@ export default React.createClass({
         ]}
       />
 
-      <header className="headline" data-selectable>
-        <div className="title" ref="title" data-placeholder="untitled">
+      <header className="headline">
+        <div className="title" ref="title" data-selectable data-placeholder="untitled">
           {story.title}
         </div>
 

@@ -3,8 +3,10 @@
 // Arguments:
 // * storyComponent: React Component
 
+require("./reading-preferences.styl")
+
 import React from "react"
-import userPreferences from "../../../helpers/user-preferences"
+import userPreferences from "helpers/user-preferences"
 
 const preferenceToInt = {
   paragraphWidth: {
@@ -36,7 +38,7 @@ const intToPreference = {
 
 export default React.createClass({
   handlePreferenceChange(type, e) {
-    value = parseInt(e.target.value, 10)
+    let value = parseInt(e.target.value, 10)
 
     userPreferences.stories[type] = intToPreference[type][value]
     this.props.storyComponent.forceUpdate()
@@ -45,7 +47,7 @@ export default React.createClass({
   render() {
     let {paragraphWidth, fontSize} = userPreferences.stories
 
-    return <div className="reading-preferences">
+    return <div data-component="reading-preferences" className="view-control">
       <div className="preference paragraph-width">
         <span className="glyphicon glyphicon-resize-horizontal preference-label" />
         <input

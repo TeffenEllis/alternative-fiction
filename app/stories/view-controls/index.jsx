@@ -1,3 +1,5 @@
+require('./view-controls.styl')
+
 import React from "react"
 
 export default React.createClass({
@@ -11,7 +13,7 @@ export default React.createClass({
   render() {
     let {primaryControls, secondaryControls} = this.props
 
-    return <aside className="view-controls no-mobile no-print">
+    return <aside data-component="view-controls" className="no-mobile no-print">
       <section className="primary-controls">
         {primaryControls.map((component, i) =>
           <span key={i} className="control">

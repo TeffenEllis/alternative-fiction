@@ -65,7 +65,7 @@ export default React.createClass({
 
   render() {
     if (!this.props.textComponent) {
-      return <span className="parent-component-not-ready" />
+      return <span data-component="unresolved" className="parent-component-not-ready" />
     }
 
     let
@@ -80,7 +80,7 @@ export default React.createClass({
       label = moment().add("m", minutes).fromNow(true)
     }
 
-    return <span className="estimated-reading-time">
+    return <span data-component="estimated-reading-time" className="view-control">
       {label}
     </span>
   }

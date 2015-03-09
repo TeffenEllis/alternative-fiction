@@ -1,48 +1,67 @@
-json("./resources/theme.json")
+json("theme.json")
+@import "~normalize.css/normalize.css"
 
-$icon-font-path = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/"
+$icon-font-name = "glyphicons-halflings-regular"
+$icon-font-path = "//netdna.bootstrapcdn.com/bootstrap/3.3.2/fonts/"
+@import "~bootstrap-styl/bootstrap/glyphicons.styl"
 
-html, body, main
- height: 100%
+*, *:before, *:after
+  box-sizing border-box
+
+html, body
+ height 100%
 
 body
   background white
 
-  color black
+  cursor default
+
+  color text-color
   font-family font-sans-serif
   font-size text-regular
-  font-smoothing antialiased
   font-variant-ligatures common-ligatures
   line-height 1.45
 
   user-select none
 
+a, .action
+  color brand-primary
+  text-decoration none
+
+  &:hover
+    cursor pointer
+    text-decoration underlins
+
 .mask
-  display: block
-  visibility: hidden
+  display block
+  visibility hidden
 
-  position: fixed
-  top: 0
-  left: 0
-  z-index: priority-medium
+  position fixed
+  top 0
+  left 0
+  z-index priority-medium
 
-  width: 100%
-  height: 100%
+  width 100%
+  height 100%
 
   body.disabled &
-    visibility: visible
+    visibility visible
+
+main
+  min-height: 100%
 
 [data-component], header, section, aside, footer
   display flex
-  flex-direction: column
-  align-items: stretch
-  flex-shrink: 0
+  flex-direction column
+  align-items stretch
+  flex-shrink 0
 
-body [data-selectable]
+[data-selectable], [contenteditable]
+  cursor text
   user-select text
 
 ::selection
-  background: brand-primary
+  background brand-primary
 
 ::-moz-selection
-  background: brand-primary
+  background brand-primary

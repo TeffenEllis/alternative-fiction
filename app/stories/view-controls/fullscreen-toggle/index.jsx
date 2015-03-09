@@ -1,7 +1,7 @@
 // Fullscreen toggle button.
 
 import React from "react"
-import fullscreenHelper from "../../../helpers/fullscreen"
+import fullscreenHelper from "helpers/fullscreen"
 
 export default React.createClass({
   componentDidMount() {
@@ -28,7 +28,7 @@ export default React.createClass({
       label = "Close"
     }
 
-    return <span className="toggle-fullscreen" onClick={this.toggleFullscreen}>
+    return <span data-component="toggle-fullscreen" className="view-control" onClick={this.toggleFullscreen}>
       <span className={`glyphicon glyphicon-${icon} toggle-icon`} title={label} />
     </span>
   },

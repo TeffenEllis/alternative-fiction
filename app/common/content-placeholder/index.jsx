@@ -1,10 +1,12 @@
+require("./content-placeholder.styl")
+
 // Placeholder component. Used to fill in loading wait time.
 
 import React from "react"
 
 export default React.createClass({
   render() {
-    return <section className="content-placeholder">
+    return <section data-component="content-placeholder">
       <img
         className="alternative-fiction-text-logo"
         src={require("../../images/foundation/text-logo.svg")} />

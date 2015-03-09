@@ -1,0 +1,79 @@
+json("theme.json")
+
+$navigation-width = 130px
+
+[data-component="site-navigation"]
+  position fixed
+  top 0
+  left 0
+  bottom 0
+  outline none
+  background-color black
+
+  width $navigation-width
+
+  .list-group
+    display flex
+    align-items grow
+
+  .list-group .list-group-item
+    display flex
+    align-items center
+    justify-content center
+
+    background black
+
+    padding 13px 0
+    padding-right 13px
+
+    color gray-light
+
+    .item-label
+      font-size 1.1em
+
+    .accent
+      margin-right 15px
+
+    &:first-child
+      padding-top 20px
+
+    &:hover
+      color white
+
+  &:hover
+    color text-color
+
+.site-navigation-overlay
+  display none
+  position fixed
+  left 0
+  top 0
+  right 0
+  bottom 0
+
+#main-content
+  position absolute
+  top 0
+  left 0
+  z-index priority-medium
+
+  background white
+  width 100%
+
+  transition-duration 150ms
+  transition-timing-function cubic-bezier(0.2, 0.3, 0.25, 0.9)
+  transition-property transform
+
+
+body.site-navigation-active
+  height 100%
+  overflow hidden
+
+  .site-navigation-overlay
+    display block
+    left $navigation-width
+    z-index priority-high
+
+  #main-content
+    transform translate3d($navigation-width, 0, 0)
+

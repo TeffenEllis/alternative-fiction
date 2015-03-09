@@ -1,5 +1,5 @@
 
-import {title} from "../resources/meta-attributes"
+import {title} from "resources/meta-attributes"
 /**
  * Application title helper
  * Append default title with optional prefix.

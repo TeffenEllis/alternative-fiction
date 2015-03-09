@@ -1,5 +1,7 @@
 // Story saved state indicator.
 
+require("./save-state.styl")
+
 import React from "react"
 
 export default React.createClass({
@@ -20,7 +22,7 @@ export default React.createClass({
   render() {
     let attributes = this.getAttributes()
 
-    return <span className={`save-state ${attributes.className}`}>
+    return <span data-component="save-state" className={`view-control ${attributes.className}`}>
       {attributes.text}
     </span>
   }

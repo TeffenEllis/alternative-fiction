@@ -1,4 +1,4 @@
-import key from "../../resources/key-map"
+import key from "resources/key-map"
 import {contains} from "lodash"
 
 let validations = {}

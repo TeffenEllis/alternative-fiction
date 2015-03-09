@@ -2,8 +2,8 @@ import React from "react"
 import Router from "react-router"
 import Firebase from "firebase"
 import ReactFireMixin from "reactfire"
-import {api} from "../helpers/path"
-import ContentPlaceholder from "../common/content-placeholder"
+import {api} from "helpers/path"
+import ContentPlaceholder from "common/content-placeholder"
 
 export default React.createClass({
   componentWillMount() {
@@ -33,7 +33,7 @@ export default React.createClass({
   render() {
     if (this.state.story) {
       this.transitionTo("story-edit", {
-        id: this.storyRef.name()
+        id: this.storyRef.key()
       })
     }
 

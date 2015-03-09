@@ -3,12 +3,12 @@ import React from "react"
 import Firebase from "firebase"
 import ReactFireMixin from "reactfire"
 
-import title from "../helpers/title"
-import {api} from "../helpers/path"
+import title from "helpers/title"
+import {api} from "helpers/path"
 import Router from "react-router"
 
 import View from "./story-editor"
-import ContentPlaceholder from "../common/content-placeholder"
+import ContentPlaceholder from "common/content-placeholder"
 
 export default React.createClass({
   mixins: [

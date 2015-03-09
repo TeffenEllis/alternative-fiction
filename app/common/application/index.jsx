@@ -1,7 +1,7 @@
 import React from "react"
-import SiteMenu from "./common/site-menu"
-import SiteNavigation from "./common/site-navigation"
-import navigation from "./resources/navigation"
+import SiteMenu from "common/site-menu"
+import SiteNavigation from "common/site-navigation"
+import navigation from "resources/navigation"
 import {RouteHandler} from "react-router"
 
 const NAVIGATION_CLASS = "site-navigation-active"

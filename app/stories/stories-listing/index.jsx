@@ -5,7 +5,7 @@
 import React from "react"
 
 import {Link} from "react-router"
-import HumanTime from "../../common/human-time"
+import HumanTime from "common/human-time"
 
 export default React.createClass({
   deleteStory(id) {

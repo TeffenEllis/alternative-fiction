@@ -1,0 +1,56 @@
+json("theme.json")
+
+$expanded-width = 114px
+$collapsed-width = 20px
+$width-delta = $expanded-width - $collapsed-width
+
+[data-component="view-controls"]
+  .primary-controls
+    display flex
+    align-items center
+    flex-flow row
+    justify-content flex-end
+
+    position fixed
+    right 24px
+    top 12px
+    z-index priority-high
+
+    background-color white
+    box-shadow 0 0 10px 10px white
+
+    .control + .control
+      margin-left 10px
+
+  .secondary-controls
+    display flex
+
+    position fixed
+    z-index priority-high
+
+    bottom 12px
+    right - $width-delta
+
+    width $expanded-width
+
+    transition-duration speed-fast
+    transition-timing-function ease-out
+    transition-delay 100ms
+    transition-property transform
+
+    &:hover
+      transform translate3d(- $width-delta, 0, 0)
+
+  .view-control
+    text-transform lowercase
+    text-rendering auto
+    font-variant small-caps
+    font-family font-accent
+    color gray-light
+
+    cursor default
+
+    transition color 100ms linear
+
+    &:hover
+      color: text-color

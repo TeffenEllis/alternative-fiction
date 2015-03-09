@@ -1,18 +1,29 @@
 {
   "text": {
+    "color": "#333",
     "regular": "16px"
   },
 
   "font": {
     "accent": "\"jaf-bernina-sans\", \"freight-text-pro\", \"Georgia\", \"Cambria\", \"Times New Roman\", \"Times\", serif",
-    "sans-serif": "\"freight-text-pro\", \"Georgia\", \"Cambria\", \"Times New Roman\", \"Times\", serif",
-    "serif": "\"freight-sans-pro\", \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", \"Geneva\", \"Verdana\", sans-serif"
+    "sans-serif": "\"freight-sans-pro\", \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", \"Geneva\", \"Verdana\", sans-serif",
+    "serif": "\"freight-text-pro\", \"Georgia\", \"Cambria\", \"Times New Roman\", \"Times\", serif"
   },
 
   "black": "#1a1a1a",
   "white": "#fff",
   "offwhite": "#eee",
   "dark-accent": "#e7e6dd",
+
+  "application-background": "#fff",
+
+  "gray": {
+    "lighter": "#eee",
+    "light": "#777",
+    "base": "#555",
+    "dark": "#333",
+    "darker": "#222"
+  },
 
   "brand": {
     "primary": "#00D9E8",

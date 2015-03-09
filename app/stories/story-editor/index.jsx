@@ -1,19 +1,25 @@
+require("medium-editor/dist/css/medium-editor.css")
+require("medium-editor/dist/css/themes/bootstrap.css")
+require("./medium-editor.styl")
+require("../story/story.styl")
+require("./story-editor.styl")
+
 import React from "react"
 
 import {extend, debounce} from "lodash"
 import MediumEditor from "medium-editor"
-import MEDIUM_OPTIONS from "../../resources/medium-editor-configuration"
-import markdown from "../../helpers/markdown"
+import MEDIUM_OPTIONS from "resources/medium-editor-configuration"
+import markdown from "helpers/markdown"
 import html2markdown from "html2markdown"
 
-import userPreferences from "../../helpers/user-preferences"
-import HumanTime from "../../common/human-time"
-import EstimatedReadingTime from "../../common/estimated-reading-time"
+import userPreferences from "helpers/user-preferences"
+import HumanTime from "common/human-time"
+import EstimatedReadingTime from "common/estimated-reading-time"
 import validations from "./validations"
 
-import ViewControls from "../view-controls"
-import ReadingPreferences from "../view-controls/reading-preferences"
-import SavedState from "../view-controls/saved-state"
+import ViewControls from "stories/view-controls"
+import ReadingPreferences from "stories/view-controls/reading-preferences"
+import SavedState from "stories/view-controls/save-state"
 
 
 const UPDATE_THROTTLE = 1500
@@ -87,7 +93,7 @@ export default React.createClass({
   render() {
     let {fontSize, paragraphWidth} = userPreferences.stories
 
-    return <section className="story edit">
+    return <section data-component="story-editor" data-component-mode="edit">
       <ViewControls
         primaryControls={[
           <SavedState isSaving={this.state.isSaving} isSaved={this.state.isSaved} />,

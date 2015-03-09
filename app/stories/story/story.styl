@@ -1,0 +1,43 @@
+json("theme.json")
+
+@import "./story-body.styl"
+
+[data-component^="story"]
+  margin 16px auto
+
+  [data-placeholder]:empty:not(:focus):before
+    content attr(data-placeholder)
+    color  gray-light
+    cursor text
+
+  .headline
+    text-align center
+
+    .title
+      font-family font-serif
+      font-weight bold
+      font-size 2em
+
+    .description
+      font-style italic
+      color gray-dark
+
+    .section-seperator
+      width 85%
+      border none
+      border-bottom 1px solid #555
+      z-index -1
+
+      display flex
+      justify-content center
+
+      &:after
+        content "\2767" // Binding Signature Leaf
+        background white
+        width 35px
+        display flex
+        height 24px
+        justify-content center
+        align-items center
+        font-size 24px
+        margin-top -12px
