@@ -1,12 +1,11 @@
-import React from "react"
+import React, {Component} from "react"
 import SiteMenu from "common/site-menu"
 import SiteNavigation from "common/site-navigation"
 import navigation from "resources/navigation"
-import {RouteHandler} from "react-router"
 
 const NAVIGATION_CLASS = "site-navigation-active"
 
-export default React.createClass({
+export default class Application extends Component {
   render() {
     return <div className="application-root">
       <div id="above-content" />
@@ -16,12 +15,12 @@ export default React.createClass({
 
       <main id="main-content">
         <SiteMenu onNavigation={this.setNavigationClass.bind(this, "add")} />
-        <RouteHandler />
+        {this.props.children}
       </main>
     </div>
-  },
+  }
 
   setNavigationClass(method) {
     document.body.classList[method](NAVIGATION_CLASS)
   }
-})
+}

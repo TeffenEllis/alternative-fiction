@@ -3,7 +3,7 @@
 // Arguments:
 // * storyComponent: React Component
 
-require("./reading-preferences.styl")
+import "./reading-preferences.styl"
 
 import React from "react"
 import userPreferences from "helpers/user-preferences"
@@ -11,14 +11,14 @@ import userPreferences from "helpers/user-preferences"
 const preferenceToInt = {
   paragraphWidth: {
     normal: 0,
-    wider:  1,
-    full:   2
+    wider: 1,
+    full: 2
   },
 
   fontSize: {
     smaller: 0,
-    normal:  1,
-    larger:  2
+    normal: 1,
+    larger: 2
   }
 }
 
@@ -37,40 +37,39 @@ const intToPreference = {
 }
 
 export default React.createClass({
-  handlePreferenceChange(type, e) {
-    let value = parseInt(e.target.value, 10)
+  handlePreferenceChange(type, {target: {value}}) {
+    value = parseInt(value, 10)
 
     userPreferences.stories[type] = intToPreference[type][value]
     this.props.storyComponent.forceUpdate()
   },
 
   render() {
-    let {paragraphWidth, fontSize} = userPreferences.stories
+    const {paragraphWidth, fontSize} = userPreferences.stories
 
-    return <div data-component="reading-preferences" className="view-control">
+    return <div className="view-control" data-component="reading-preferences">
       <div className="preference paragraph-width">
         <span className="glyphicon glyphicon-resize-horizontal preference-label" />
         <input
           className="slider"
-          type="range"
-          min={0}
           max={2}
-          value={preferenceToInt.paragraphWidth[paragraphWidth]}
-
+          min={0}
           onChange={this.handlePreferenceChange.bind(this, "paragraphWidth")}
+          type="range"
+          value={preferenceToInt.paragraphWidth[paragraphWidth]}
         />
       </div>
 
       <div className="preference font-size">
-        <span
-          className="glyphicon glyphicon-resize-vertical preference-label" />
+        <span className="glyphicon glyphicon-resize-vertical preference-label" />
+
         <input
           className="slider"
-          type="range"
-          min={0}
           max={2}
-          value={preferenceToInt.fontSize[fontSize]}
+          min={0}
           onChange={this.handlePreferenceChange.bind(this, "fontSize")}
+          type="range"
+          value={preferenceToInt.fontSize[fontSize]}
         />
       </div>
     </div>

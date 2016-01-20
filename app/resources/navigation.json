@@ -3,37 +3,37 @@
     {
       "label": "Home",
       "icon": "home",
-      "path": "root"
+      "path": "/"
     },
 
     {
       "label": "Stories",
       "icon": "list-alt",
-      "path": "stories"
+      "path": "/stories"
     },
 
     {
       "label": "Search",
       "icon": "search",
-      "path": "root"
+      "path": "/"
     },
 
     {
       "label": "Create",
       "icon": "file",
-      "path": "stories-new"
+      "path": "/stories/new"
     },
 
     {
       "label": "Settings",
       "icon": "wrench",
-      "path": "root"
+      "path": "/"
     },
 
     {
       "label": "Library",
       "icon": "book",
-      "path": "root"
+      "path": "/"
     }
   ]
 }

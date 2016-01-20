@@ -2,64 +2,71 @@
 // Arguments:
 // * Stories: Array.
 
-import React from "react"
+import React, {Component} from "react"
 
 import {Link} from "react-router"
 import HumanTime from "common/human-time"
 
-export default React.createClass({
+export default class StoriesListing extends Component {
   deleteStory(id) {
-    let storyRef = this.props.storiesRef.child(id)
+    const storyRef = this.props.storiesRef.child(id)
 
-    storyRef.remove(function (error) {
-      if (error) {
-        console.error(error)
-      } else {
-        this.props.onChange()
-      }
-    }.bind(this))
-  },
+    storyRef.remove(error => {
+      if (error) return console.error(error)
+
+      this.props.onChange()
+    })
+  }
 
   render() {
-    let {stories} = this.props
+    const {stories} = this.props
 
     return <table className="table stories">
       <thead>
-        <th className="id">ID</th>
-        <th className="title">Title</th>
-        <th className="description">Description</th>
-        <th className="updated-at">Updated</th>
-        <th className="created-at">Created</th>
-        <th className="delete-story">Delete</th>
+        <tr>
+          <th className="id">ID</th>
+          <th className="title">Title</th>
+          <th className="description">Description</th>
+          <th className="updated-at">Updated</th>
+          <th className="created-at">Created</th>
+          <th className="delete-story">Delete</th>
+        </tr>
       </thead>
 
       <tbody>
-        {Object.keys(stories).map((id) => this.renderRow(id, stories[id]))}
+        {stories.map(story => this.renderRow(story))}
       </tbody>
     </table>
-  },
+  }
 
   renderDeleteConfirmation(id, story) {
-    let actions = <div>
+    const actions = <div>
       <span className="btn dark btn-danger" onClick={this.deleteStory.bind(this, id)}>Yes</span>
       <span className="btn dark btn-primary" data-dismiss="modal">No</span>
     </div>
 
-    let confirmationModal = <Modal title="Confirm Deletion" type="warning" actions={actions}>
+    const confirmationModal = <Modal actions={actions} title="Confirm Deletion" type="warning">
       <p key="text">{"Are you sure you want to delete"}</p>
-      <p key="title">{'"' + story.title + '"?'}</p>
+      <p key="title">{`"${story.title}"?`}</p>
     </Modal>
 
     React.render(confirmationModal, document.querySelector("#above-content"))
-  },
+  }
 
-  renderRow(id, story) {
+  renderRow(story) {
+    const id = story[".key"]
+
     return <tr data-id={id} key={id}>
       <td className="id">{id}</td>
 
       <td className="title">
-        <Link to="story" params={{id: id}}>{story.title || "untitled"}</Link>
-        <Link to="story-edit" params={{id: id}}>(edit)</Link>
+        <Link to={`/stories/${id}`}>
+          {story.title || "untitled"}
+        </Link>
+
+        <Link to={`/stories/${id}/edit`}>
+          (edit)
+        </Link>
       </td>
 
       <td className="description">{story.description}</td>
@@ -77,4 +84,4 @@ export default React.createClass({
       </td>
     </tr>
   }
-})
+}

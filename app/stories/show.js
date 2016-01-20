@@ -1,14 +1,10 @@
-import React from "react"
-
+import ContentPlaceholder from "common/content-placeholder"
 import Firebase from "firebase"
-import ReactFireMixin from "reactfire"
-
 import title from "helpers/title"
 import {api} from "helpers/path"
-import Router from "react-router"
-
+import React from "react"
+import ReactFireMixin from "reactfire"
 import View from "./story"
-import ContentPlaceholder from "common/content-placeholder"
 
 export default React.createClass({
   componentDidUpdate() {
@@ -16,7 +12,7 @@ export default React.createClass({
   },
 
   componentWillMount() {
-    this.storyRef = new Firebase(api(`stories/${this.getParams().id}`))
+    this.storyRef = new Firebase(api(`stories/${this.props.params.id}`))
     this.bindAsObject(this.storyRef, "story")
   },
 
@@ -27,26 +23,25 @@ export default React.createClass({
   },
 
   mixins: [
-    ReactFireMixin,
-    Router.State
+    ReactFireMixin
   ],
 
   render() {
-    if (this.state.story) {
-      return <View story={this.state.story} />
-    } else {
-      return <ContentPlaceholder />
-    }
+    if (!this.state.story) return <ContentPlaceholder />
+
+    return <View story={this.state.story} />
   },
 
   setTitle() {
-    let story = this.state.story
+    const {story} = this.state
 
     if (!story) {
-      return document.title = title()
+      document.title = title()
+      return
     }
 
-    let base = (story.title || "untitled").replace("&nbsp;", "")
+    const base = (story.title || "untitled").replace("&nbsp;", "")
+
     document.title = title(base)
   }
 })

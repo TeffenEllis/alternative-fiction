@@ -1,5 +1,3 @@
-export function api (path) {
-  path = path || ""
-
+export function api(path = "") {
   return `${__API_BASE}/${path}`
 }

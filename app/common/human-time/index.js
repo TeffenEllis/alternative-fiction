@@ -21,9 +21,8 @@ export default React.createClass({
   },
 
   render() {
-    let
-      momentInstance = moment(this.props.datetime),
-      ISOFormatted   = momentInstance.toISOString()
+    const momentInstance = moment(this.props.datetime)
+    const ISOFormatted = momentInstance.toISOString()
 
     return <time className="human-time" dateTime={ISOFormatted} title={ISOFormatted}>
       {momentInstance.fromNow()}

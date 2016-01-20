@@ -1,14 +1,12 @@
 // Abstract fullscreen API.
-let fullscreenHelper = {}
+const fullscreenHelper = {}
 
 Object.defineProperties(fullscreenHelper, {
   fullscreen: {
     set(enabled) {
-      if (enabled) {
-        return document.documentElement.requestFullscreen()
-      } else {
-        return document.exitFullscreen()
-      }
+      if (enabled) return document.documentElement.requestFullscreen()
+
+      return document.exitFullscreen()
     },
 
     get() {

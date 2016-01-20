@@ -10,7 +10,7 @@ import moment from "moment"
 import {size, debounce} from "lodash"
 
 const WORDS_PER_MINUTE = 250
-const SCROLL_THROTTLE  = 500
+const SCROLL_THROTTLE = 500
 
 export default React.createClass({
   componentDidMount() {
@@ -21,22 +21,18 @@ export default React.createClass({
     // The throttled function must be in a callback because React isn't detecting
     // that an update should be made.
 
-    let throttledUpdate = debounce(this.forceUpdate.bind(this), SCROLL_THROTTLE)
-    $(window).scroll(function () {
-      throttledUpdate()
-    })
+    const throttledUpdate = debounce(this.forceUpdate.bind(this), SCROLL_THROTTLE)
+
+    $(window).scroll(() => throttledUpdate())
   },
 
   componentWillUnmount() {
     $(window).unbind("scroll")
   },
 
-  estimateTimeByText(text) {
-    text = text || ""
-
-    let
-      wordCount = size(text.match(/\s+/g)),
-      minutes   = (wordCount / WORDS_PER_MINUTE) * (1 - this.percentageRead())
+  estimateTimeByText(text = "") {
+    const wordCount = size(text.match(/\s+/g))
+    const minutes = wordCount / WORDS_PER_MINUTE * (1 - this.percentageRead())
 
     return {wordCount, minutes}
   },
@@ -48,16 +44,13 @@ export default React.createClass({
   },
 
   percentageRead() {
-    if (!this.props.textComponent) {
-      return 0;
-    }
+    if (!this.props.textComponent) return 0
 
-    let
-      $this         = $(window),
-      currentY      = $this.scrollTop(),
-      windowHeight  = $this.height(),
-      scrollHeight  = $(this.props.textComponent.getDOMNode()).height(),
-      scrollPercent = (currentY / (scrollHeight - windowHeight))
+    const $this = $(window)
+    const currentY = $this.scrollTop()
+    const windowHeight = $this.height()
+    const scrollHeight = $(this.props.textComponent).height()
+    const scrollPercent = currentY / (scrollHeight - windowHeight)
 
     // Percentage will be higher than 1 if the window is scrolled beyond the element.
     return Math.min(scrollPercent, 1)
@@ -65,22 +58,23 @@ export default React.createClass({
 
   render() {
     if (!this.props.textComponent) {
-      return <span data-component="unresolved" className="parent-component-not-ready" />
+      return <span className="parent-component-not-ready" data-component="unresolved" />
     }
 
-    let
-      label = "",
-      {minutes, wordCount} = this.estimateTimeByText(this.props.textComponent.getDOMNode().innerHTML)
+    let label = ""
+    const {minutes, wordCount} = this.estimateTimeByText(this.props.textComponent.innerHTML)
 
     if (wordCount < WORDS_PER_MINUTE) {
       label = "A few seconds" // Very short text.
-    } else if (minutes === 0) {
+    }
+    else if (minutes === 0) {
       label = "Finished"
-    } else {
-      label = moment().add("m", minutes).fromNow(true)
+    }
+    else {
+      label = moment().add(minutes, "m").fromNow(true)
     }
 
-    return <span data-component="estimated-reading-time" className="view-control">
+    return <span className="view-control" data-component="estimated-reading-time">
       {label}
     </span>
   }

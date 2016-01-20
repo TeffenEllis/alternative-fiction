@@ -1,4 +1,4 @@
-require("./story.styl")
+import "./story.styl"
 
 import React from "react"
 import HumanTime from "common/human-time"
@@ -16,9 +16,8 @@ export default React.createClass({
   },
 
   render() {
-    let
-      {fontSize, paragraphWidth} = userPreferences.stories,
-      story = this.props.story
+    const {fontSize, paragraphWidth} = userPreferences.stories
+    const {story} = this.props
 
     return <section data-component="story" data-component-mode="view">
       <ViewControls
@@ -33,16 +32,16 @@ export default React.createClass({
       />
 
       <header className="headline">
-        <div className="title" ref="title" data-selectable data-placeholder="untitled">
+        <div className="title" data-placeholder="untitled" data-selectable ref="title">
           {story.title}
         </div>
 
         <div
           className="description"
-          data-selectable
           dangerouslySetInnerHTML={{
             __html: markdown.render(story.description)
           }}
+          data-selectable
         />
 
         <div className="author">
@@ -54,14 +53,14 @@ export default React.createClass({
       </header>
 
       <article
-        ref="body"
         className="body"
-        data-selectable
-        data-width={paragraphWidth}
-        data-font-size={fontSize}
         dangerouslySetInnerHTML={{
           __html: markdown.render(story.body)
         }}
+        data-font-size={fontSize}
+        data-selectable
+        data-width={paragraphWidth}
+        ref="body"
       />
 
       <footer className="summary" />

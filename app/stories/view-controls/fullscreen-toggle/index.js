@@ -19,16 +19,15 @@ export default React.createClass({
   },
 
   render() {
-    let
-      icon  = "fullscreen",
-      label = "Fullscreen"
+    let icon = "fullscreen"
+    let label = "Fullscreen"
 
     if (fullscreenHelper.fullscreen) {
-      icon  = "remove"
+      icon = "remove"
       label = "Close"
     }
 
-    return <span data-component="toggle-fullscreen" className="view-control" onClick={this.toggleFullscreen}>
+    return <span className="view-control" data-component="toggle-fullscreen" onClick={this.toggleFullscreen}>
       <span className={`glyphicon glyphicon-${icon} toggle-icon`} title={label} />
     </span>
   },

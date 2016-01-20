@@ -10,14 +10,14 @@ import {size} from "lodash"
 import View from "./stories-listing"
 import ContentPlaceholder from "common/content-placeholder"
 
-module.exports = React.createClass({
+export default React.createClass({
   componentDidUpdate() {
     this.setTitle()
   },
 
   componentWillMount() {
     this.storiesRef = new Firebase(api("stories"))
-    this.bindAsObject(this.storiesRef.limitToFirst(100), "stories")
+    this.bindAsArray(this.storiesRef.orderByChild("updatedAt").limitToLast(100), "stories")
   },
 
   handleChange() {
@@ -35,19 +35,17 @@ module.exports = React.createClass({
   },
 
   render() {
-    if (this.state.stories) {
-      return <View
-        storiesRef={this.storiesRef}
-        stories={this.state.stories}
-        onChange={this.handleChange} />
-    }
-    else {
-      return <ContentPlaceholder />
-    }
+    if (!this.state.stories) return <ContentPlaceholder />
+
+    return <View
+      onChange={this.handleChange}
+      stories={this.state.stories}
+      storiesRef={this.storiesRef}
+    />
   },
 
   setTitle() {
-    let storyCount = this.state.stories ? size(this.state.stories) : 0
+    const storyCount = this.state.stories ? size(this.state.stories) : 0
 
     document.title = title(`(${storyCount}) Stories`)
   }

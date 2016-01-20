@@ -1,18 +1,22 @@
-var
-  webpack = require("webpack"),
-  WebpackDevServer = require("webpack-dev-server"),
-  config = require("../webpack.config")
+/* eslint-env node */
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
+const port = 8080
+const webpack = require("webpack")
+const WebpackDevServer = require("webpack-dev-server")
+const config = require("../webpack.config")
+
+const server = new WebpackDevServer(webpack(config), {
   historyApiFallback: true,
-  stats: {colors: true}
-
-}).listen(8080, "localhost", function (err) {
-  if (err) {
-    console.log(err)
+  publicPath: config.output.publicPath,
+  stats: {
+    assets: true,
+    chunks: false,
+    chunkModules: false,
+    colors: true,
+    hash: false,
+    timings: true,
+    version: false
   }
-
-  console.log("Listening at localhost:3000")
 })
+
+server.listen(port, "localhost")

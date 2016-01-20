@@ -1,12 +1,10 @@
-require("medium-editor/dist/css/medium-editor.css")
-require("medium-editor/dist/css/themes/bootstrap.css")
-require("./medium-editor.styl")
-require("../story/story.styl")
-require("./story-editor.styl")
+import "./medium-editor.styl"
+import "../story/story.styl"
+import "./story-editor.styl"
 
 import React from "react"
 
-import {extend, debounce} from "lodash"
+import {debounce} from "lodash"
 import MediumEditor from "medium-editor"
 import MEDIUM_OPTIONS from "resources/medium-editor-configuration"
 import markdown from "helpers/markdown"
@@ -33,14 +31,12 @@ export default React.createClass({
   componentDidMount() {
     this.populateContentEditableFields()
 
-    let
-      title = this.refs.title.getDOMNode(),
-      body = this.refs.body.getDOMNode()
+    const {body, title} = this.refs
 
     validations.title.init(title)
 
     // Setup editor controls.
-    new MediumEditor(body, MEDIUM_OPTIONS)
+    new MediumEditor(body, MEDIUM_OPTIONS) // eslint-disable-line no-new
 
     body.focus()
   },
@@ -51,10 +47,10 @@ export default React.createClass({
 
     this.setState({
       isSaved: false
-    }, function () {
+    }, () => {
       this.updateContentEditableFields()
       this.saveStory()
-    }.bind(this))
+    })
   },
 
   getInitialState() {
@@ -65,19 +61,20 @@ export default React.createClass({
       // Remote model reference.
       storyRef: this.props.storyRef,
       // Model used for editing.
-      story: this.props.story,
+      story: this.props.story
     }
   },
 
   populateContentEditableFields() {
     // Contenteditable fields must be assigned outside of React's update cycle.
     // Otherwise the cursor position will be lost on each update.
-    contentEditableFields.forEach(function (field) {
-      let fieldDOMNode = this.refs[field].getDOMNode()
+    contentEditableFields.forEach(field => {
+      const fieldDOMNode = this.refs[field]
 
-      if (fieldDOMNode.dataset["parser"] === "markdown") {
+      if (fieldDOMNode.dataset.parser === "markdown") {
         fieldDOMNode.innerHTML = markdown.render(this.state.story[field])
-      } else {
+      }
+      else {
         fieldDOMNode.innerHTML = this.state.story[field]
       }
 
@@ -85,18 +82,18 @@ export default React.createClass({
       if (field === "body" && fieldDOMNode.innerHTML === "") {
         fieldDOMNode.innerHTML = "<p class='paragraph-placeholder'>&nbsp;</p>"
       }
-    }.bind(this))
+    })
 
     this.forceUpdate()
   },
 
   render() {
-    let {fontSize, paragraphWidth} = userPreferences.stories
+    const {fontSize, paragraphWidth} = userPreferences.stories
 
     return <section data-component="story-editor" data-component-mode="edit">
       <ViewControls
         primaryControls={[
-          <SavedState isSaving={this.state.isSaving} isSaved={this.state.isSaved} />,
+          <SavedState isSaved={this.state.isSaved} isSaving={this.state.isSaving} />,
 
           <EstimatedReadingTime textComponent={this.refs.body} />
         ]}
@@ -108,21 +105,21 @@ export default React.createClass({
 
       <header className="headline">
         <div
-          ref="title"
           className="title"
-          data-placeholder="Title"
-          data-parser="plaintext"
           contentEditable
+          data-parser="plaintext"
+          data-placeholder="Title"
           onInput={this.handleContentChange}
+          ref="title"
         />
 
         <div
-          ref="description"
           className="description"
-          data-placeholder="Description"
-          data-parser="markdown"
           contentEditable
+          data-parser="markdown"
+          data-placeholder="Description"
           onInput={this.handleContentChange}
+          ref="description"
         />
 
         <div className="author">
@@ -133,56 +130,56 @@ export default React.createClass({
       </header>
 
       <article
-        ref="body"
         className="body"
-        data-width={paragraphWidth}
+        contentEditable
         data-font-size={fontSize}
         data-parser="markdown"
-        contentEditable
+        data-width={paragraphWidth}
         onInput={this.handleContentChange}
+        ref="body"
       />
 
       <footer className="summary" />
     </section>
   },
 
-  saveStory: debounce(function () {
+  saveStory: debounce(function() {
     this.state.isSaving = true
     this.forceUpdate()
 
-    let
-      {title, description, body} = this.state.story,
-      updatedAt = Firebase.ServerValue.TIMESTAMP
+    const {title, description, body} = this.state.story
+    const updatedAt = window.Firebase.ServerValue.TIMESTAMP
 
-    this.state.storyRef.transaction(function () {
+    this.state.storyRef.transaction(() => {
       return {title, description, body, updatedAt}
     }
-    , function (error, committed, snapshot) {
+    , (error, committed, snapshot) => {
       if (error) {
         console.error(error)
         this.state.isSaving = false
-        this.state.isSaved  = false
-      } else {
+        this.state.isSaved = false
+      }
+      else {
         this.state.isSaving = false
-        this.state.isSaved  = true
+        this.state.isSaved = true
         this.state.story = snapshot.val()
       }
 
       this.forceUpdate()
-    }.bind(this))
-
+    })
   }, UPDATE_THROTTLE),
 
   updateContentEditableFields() {
     // Fetch data from DOM, update model attributes.
-    contentEditableFields.forEach(function (field) {
-      let fieldDOMNode = this.refs[field].getDOMNode()
+    contentEditableFields.forEach(field => {
+      const fieldDOMNode = this.refs[field]
 
-       if (fieldDOMNode.dataset["parser"] === "markdown") {
+      if (fieldDOMNode.dataset.parser === "markdown") {
         this.state.story[field] = html2markdown(fieldDOMNode.innerHTML)
-       } else {
+      }
+      else {
         this.state.story[field] = fieldDOMNode.textContent
-       }
-    }.bind(this))
+      }
+    })
   }
 })

@@ -1,21 +1,23 @@
-"use strict"
+import "./index.styl"
+import favicon from "images/foundation/glyph-logo-small.png"
 
-require("./index.styl")
-require("lib/fullscreen-polyfill/register")
+import "babel-polyfill"
+import "lib/fullscreen-polyfill/register"
 
 import React from "react"
+import {render} from "react-dom"
 import routes from "./routes"
-import Router from "react-router"
+import {browserHistory, Router} from "react-router"
 
-let link   = document.createElement("link")
-link.rel   = "shortcut icon"
-link.sizes = "16x16"
-link.type  = "image/x-icon"
-link.href  = require("images/foundation/glyph-logo-small.png")
-document.head.appendChild(link)
+document.head.appendChild(Object.assign(document.createElement("link"), {
+  rel: "shortcut icon",
+  sizes: "16x16",
+  type: "image/x-icon",
+  href: favicon
+}))
 
-document.addEventListener("DOMContentLoaded", () =>
-  Router.run(routes, Router.HistoryLocation, (Handler) =>
-    React.render(<Handler />, document.body)
-  )
-)
+document.addEventListener("DOMContentLoaded", () => {
+  render(<Router history={browserHistory}>
+    {routes}
+  </Router>, document.querySelector("main"))
+})

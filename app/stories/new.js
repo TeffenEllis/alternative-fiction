@@ -1,11 +1,20 @@
 import React from "react"
-import Router from "react-router"
 import Firebase from "firebase"
 import ReactFireMixin from "reactfire"
 import {api} from "helpers/path"
 import ContentPlaceholder from "common/content-placeholder"
 
 export default React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
+  componentDidUpdate() {
+    if (this.state.story) {
+      this.context.router.push(`/stories/${this.storyRef.key()}/edit`)
+    }
+  },
+
   componentWillMount() {
     this.storiesRef = new Firebase(api("stories"))
     this.storyRef = this.storiesRef.push({
@@ -26,17 +35,10 @@ export default React.createClass({
   },
 
   mixins: [
-    ReactFireMixin,
-    Router.Navigation
+    ReactFireMixin
   ],
 
   render() {
-    if (this.state.story) {
-      this.transitionTo("story-edit", {
-        id: this.storyRef.key()
-      })
-    }
-
     return <ContentPlaceholder />
   }
 })

@@ -1,26 +1,31 @@
-require("./application-error.styl")
+import "./application-error.styl"
 
-import React from "react"
+import React, {Component} from "react"
 import title from "helpers/title"
-import Router from "react-router"
 
-export default React.createClass({
-  mixins: [
-    Router.State
-  ],
-
+export default class ApplicationError extends Component {
   componentDidMount() {
-    document.title = title(`${this.props.code} - Error`)
-  },
+    document.title = title(`${this.getStatusCode()} - Error`)
+  }
 
   getMessage() {
-    return this.props.message || `"${this.getParams().splat}" is invalid.`
-  },
+    const message = {
+      401: () => "The path you've requested is unauthorized.",
+      404: () => `The path "${this.props.params.splat}" cannot be found.`,
+      500: () => "An error occured while completing your request."
+    }[this.getStatusCode()]
+
+    return message()
+  }
+
+  getStatusCode() {
+    return this.props.route.props && this.props.route.props.statusCode || 500
+  }
 
   render() {
-    return <div data-component="application-error" data-code={this.props.code}>
+    return <div data-code={this.props.code} data-component="application-error">
       <h1>
-        {this.props.code}
+        {this.getStatusCode()}
       </h1>
 
       <p>
@@ -28,4 +33,4 @@ export default React.createClass({
       </p>
     </div>
   }
-})
+}

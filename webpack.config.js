@@ -1,104 +1,76 @@
+/* eslint-env node */
+
 "use strict"
 
-var
-  ENVIRONMENT = process.env.NODE_ENV || "development",
-  webpack = require("webpack"),
-  path = require("path"),
-  routes = require("./package.json").routes,
-  metaAttributes = require("./app/resources/meta-attributes.json"),
-  HtmlWebpackPlugin = require("html-webpack-plugin"),
-  DefinePlugin = webpack.DefinePlugin,
-  globals = new DefinePlugin({
+const ENVIRONMENT = process.env.NODE_ENV || "development"
+const resolve = require("path").resolve
+const routes = require("./package.json").routes
+const metaAttributes = require("./app/resources/meta-attributes.json")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const DefinePlugin = require("webpack").DefinePlugin
+
+exports.devtool = "source-map"
+
+exports.entry = [
+  "./app/index.js"
+]
+
+exports.module = {
+  loaders: [],
+  noParse: /\.min\.js/
+}
+
+exports.output = {
+  filename: "[name].js",
+  path: resolve(__dirname, "dist"),
+  publicPath: ENVIRONMENT === "production" ? "./" : "/",
+  sourceMapFilename: "[name].map"
+}
+
+exports.plugins = [
+  new DefinePlugin({
     __API_BASE: JSON.stringify(routes[ENVIRONMENT].API_BASE),
     __APP_BASE: JSON.stringify(routes[ENVIRONMENT].APP_BASE)
   }),
-  config;
+  new HtmlWebpackPlugin({
+    inject: true,
+    meta: metaAttributes,
+    template: "app/index.html"
+  })
+]
 
-config = {
-  devtool: "source-map",
-  entry: [
-    "./app/index.jsx"
+exports.resolve = {
+  modulesDirectories: [
+    "app",
+    "node_modules"
   ],
-  module: {
-    loaders: [],
-    noParse: /\.min\.js/
-  },
-  output: {
-    path: path.join(__dirname, "dist"),
-    publicPath: "/",
-    filename: "[name].js",
-    chunkFilename: "[chunkhash].js",
-    sourceMapFilename: "debugging/[file].map",
-    hotUpdateChunkFilename: "hot/[id].[hash].hot-update.js",
-    hotUpdateMainFilename: "hot/[hash].hot-update.json"
-  },
-  plugins: [
-    globals,
-    new HtmlWebpackPlugin({
-      template: "app/index.html",
-      meta: metaAttributes
-    })
-  ],
-  remarkable: {
-    html: true,
-    preset: "full",
-    linkify: true,
-    typographer: true
-  },
-  resolve: {
-    modulesDirectories: [
-      "app",
-      "node_modules"
-    ],
-    extensions: [
-      "",
-      ".js",
-      ".jsx",
-      ".json"
-    ]
-  }
+  extensions: [
+    "",
+    ".js",
+    ".json"
+  ]
 }
 
-config.module.loaders.push(
-  {test: /\.png$/,  loader: "url-loader?prefix=img/&limit=8192"},
-  {test: /\.html$/,  loader: "html-loader"},
-  {test: /\.svg$/,  loader: "url-loader?mimetype=image/svg+xml"},
-  {test: /\.jpg$/,  loader: "url-loader?prefix=img/&limit=8192"},
-  {test: /\.gif$/,  loader: "url-loader?prefix=img/&limit=8192"},
-  {test: /\.woff$/, loader: "url-loader?prefix=font/&limit=8192"},
-  {test: /\.eot$/,  loader: "file-loader?prefix=font/"},
-  {test: /\.ttf$/,  loader: "file-loader?prefix=font/"},
-  {test: /\.md$/,   loader: "html!remarkable"},
+exports.module.loaders.push(
+  {test: /\.png$/, loader: "url-loader"},
+  {test: /\.html$/, loader: "html-loader"},
+  {test: /\.svg$/, loader: "url-loader?mimetype=image/svg+xml"},
+  {test: /\.jpg$/, loader: "url-loader"},
+  {test: /\.gif$/, loader: "url-loader"},
+  {test: /\.woff$/, loader: "url-loader"},
+  {test: /\.woff2$/, loader: "url-loader"},
   {test: /\.css$/,  loader: "style-loader!css-loader!autoprefixer"},
-  {test: /\.styl$/, loader: "style-loader!css-loader!autoprefixer!stylus-loader?paths=app/resources/"},
-  {test: /\.json$/, loader: "json-loader", exclude: [/node_modules/]},
-  {test: /\.js$/,   loader: "babel-loader?optional=runtime", exclude: [/node_modules/]}
+  {test: /\.styl$/, loader: "style-loader?singleton!css-loader!autoprefixer!stylus-loader?paths=app/resources/"},
+  {test: /\.json$/, loader: "json-loader", exclude: /node_modules/},
+  {test: /\.js$/, loader: "babel-loader", exclude: /node_modules/}
 )
 
-var JSXconfig = {test: /\.jsx$/,  loaders: ["babel-loader?optional=runtime"], exclude: [/node_modules/]}
-
 if (ENVIRONMENT === "development") {
-  config.cache = true
-  config.debug = true
-  config.devtool = "eval"
+  exports.module.preLoaders = [{
+    exclude: /node_modules/,
+    loader: "eslint-loader",
+    test: /\.js$/
+  }]
 
-  config.entry.push(
-    "webpack-dev-server/client?http://0.0.0.0:8080",
-    "webpack/hot/only-dev-server"
-  )
-
-  config.devServer = {
-    contentBase: "./dist/"
-  }
-
-  JSXconfig.loaders.unshift("react-hot")
-
-  config.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  )
+  exports.entry.unshift("webpack-dev-server/client?http://0.0.0.0:8080")
 }
-
-config.module.loaders.push(JSXconfig)
-
-module.exports = config

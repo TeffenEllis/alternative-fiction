@@ -1,6 +1,6 @@
 import Remarkable from "remarkable"
 
-let md = new Remarkable()
+const md = new Remarkable()
 
 md.block.ruler.disable([
   "list",

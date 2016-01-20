@@ -1,7 +1,6 @@
 import key from "resources/key-map"
-import {contains} from "lodash"
 
-let validations = {}
+const validations = {}
 
 validations.title = {
   maxlength: 100,
@@ -16,16 +15,14 @@ validations.title = {
   ],
 
   init(element) {
-    let self = this
+    const self = this
 
-    function preventNewlines (event) {
-      if (event.keyCode === key.enter) {
-        event.preventDefault()
-      }
+    function preventNewlines(event) {
+      if (event.keyCode === key.enter) event.preventDefault()
     }
 
-    function limitLength (event) {
-      if (contains(self.editKeys, event.keyCode)) return
+    function limitLength(event) {
+      if (!self.editKeys.includes(event.keyCode)) return
 
       if (this.textContent.length === self.maxlength) {
         event.preventDefault()
