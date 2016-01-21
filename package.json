@@ -53,7 +53,7 @@
   "name": "alternative-fiction",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nirrius/nirrius.git"
+    "url": "https://github.com/alternative-fiction/views.git"
   },
   "routes": {
     "development": {
