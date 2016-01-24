@@ -53,18 +53,16 @@ export default class StoriesListing extends Component {
     React.render(confirmationModal, document.querySelector("#above-content"))
   }
 
-  renderRow(story) {
-    const id = story[".key"]
-
-    return <tr data-id={id} key={id}>
-      <td className="id">{id}</td>
+  renderRow({uuid, ...story}) {
+    return <tr data-id={uuid} key={uuid}>
+      <td className="id">{uuid}</td>
 
       <td className="title">
-        <Link to={`/stories/${id}`}>
+        <Link to={`/stories/${uuid}`}>
           {story.title || "untitled"}
         </Link>
 
-        <Link to={`/stories/${id}/edit`}>
+        <Link to={`/stories/${uuid}/edit`}>
           (edit)
         </Link>
       </td>

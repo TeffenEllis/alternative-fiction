@@ -3,8 +3,6 @@
   "dependencies": {
     "bootstrap-styl": "5.0.5",
     "classnames": "2.2.3",
-    "coffee-script": "1.10.0",
-    "firebase": "2.3.2",
     "html2markdown": "1.1.0",
     "jquery": "2.2.0",
     "local-preferences": "1.0.3",
@@ -15,7 +13,6 @@
     "react": "0.14.6",
     "react-dom": "0.14.3",
     "react-router": "2.0.0-rc5",
-    "reactfire": "0.5.1",
     "remarkable": "1.6.1",
     "whatwg-fetch": "0.11.0"
   },

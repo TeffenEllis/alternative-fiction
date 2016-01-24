@@ -9,6 +9,7 @@ import MediumEditor from "medium-editor"
 import MEDIUM_OPTIONS from "resources/medium-editor-configuration"
 import markdown from "helpers/markdown"
 import html2markdown from "html2markdown"
+import {api} from "helpers/path"
 
 import userPreferences from "helpers/user-preferences"
 import HumanTime from "common/human-time"
@@ -57,9 +58,6 @@ export default React.createClass({
     return {
       isSaving: false,
       isSaved: true,
-
-      // Remote model reference.
-      storyRef: this.props.storyRef,
       // Model used for editing.
       story: this.props.story
     }
@@ -144,28 +142,22 @@ export default React.createClass({
   },
 
   saveStory: debounce(function() {
-    this.state.isSaving = true
-    this.forceUpdate()
+    this.setState({isSaving: true})
 
-    const {title, description, body} = this.state.story
-    const updatedAt = window.Firebase.ServerValue.TIMESTAMP
+    const {body, description, title, uuid} = this.state.story
 
-    this.state.storyRef.transaction(() => {
-      return {title, description, body, updatedAt}
-    }
-    , (error, committed, snapshot) => {
-      if (error) {
-        console.error(error)
-        this.state.isSaving = false
-        this.state.isSaved = false
-      }
-      else {
-        this.state.isSaving = false
-        this.state.isSaved = true
-        this.state.story = snapshot.val()
-      }
-
-      this.forceUpdate()
+    fetch(api(`stories/${uuid}`), {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({story: {title, description, body}})
+    })
+    .then(() => this.setState({isSaving: false, isSaved: true}))
+    .catch(error => {
+      console.error(error)
+      this.setState({isSaving: false, isSaved: false})
     })
   }, UPDATE_THROTTLE),
 
