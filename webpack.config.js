@@ -4,10 +4,11 @@
 
 const ENVIRONMENT = process.env.NODE_ENV || "development"
 const resolve = require("path").resolve
-const routes = require("./package.json").routes
+const routes = require("./package.json").routes[ENVIRONMENT]
 const metaAttributes = require("./app/resources/meta-attributes.json")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const DefinePlugin = require("webpack").DefinePlugin
+const webpack = require("webpack")
+const formatUrl = require("url").format
 
 exports.devtool = "source-map"
 
@@ -28,9 +29,12 @@ exports.output = {
 }
 
 exports.plugins = [
-  new DefinePlugin({
-    __API_BASE: JSON.stringify(routes[ENVIRONMENT].API_BASE),
-    __APP_BASE: JSON.stringify(routes[ENVIRONMENT].APP_BASE)
+  new webpack.ProvidePlugin({
+    fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
+  }),
+  new webpack.DefinePlugin({
+    __SERVICES_PATH: JSON.stringify(formatUrl(routes.services)),
+    __VIEWS_PATH: JSON.stringify(formatUrl(routes.views))
   }),
   new HtmlWebpackPlugin({
     inject: true,
@@ -59,7 +63,7 @@ exports.module.loaders.push(
   {test: /\.gif$/, loader: "url-loader"},
   {test: /\.woff$/, loader: "url-loader"},
   {test: /\.woff2$/, loader: "url-loader"},
-  {test: /\.css$/,  loader: "style-loader!css-loader!autoprefixer"},
+  {test: /\.css$/, loader: "style-loader!css-loader!autoprefixer"},
   {test: /\.styl$/, loader: "style-loader?singleton!css-loader!autoprefixer!stylus-loader?paths=app/resources/"},
   {test: /\.json$/, loader: "json-loader", exclude: /node_modules/},
   {test: /\.js$/, loader: "babel-loader", exclude: /node_modules/}
@@ -72,5 +76,5 @@ if (ENVIRONMENT === "development") {
     test: /\.js$/
   }]
 
-  exports.entry.unshift("webpack-dev-server/client?http://0.0.0.0:8080")
+  exports.entry.unshift(`webpack-dev-server/client?http://0.0.0.0:${routes.views.port}`)
 }

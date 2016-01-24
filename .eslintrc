@@ -7,8 +7,8 @@
     "jsx": true
   },
   "globals": {
-    "__API_BASE": false,
-    "__APP_BASE": false
+    "__SERVICES_PATH": false,
+    "__VIEWS_PATH": false
   },
   "parser": "babel-eslint",
   "plugins": [

@@ -1,3 +1,3 @@
 export function api(path = "") {
-  return `${__API_BASE}/${path}`
+  return `${__SERVICES_PATH}/${path}`
 }

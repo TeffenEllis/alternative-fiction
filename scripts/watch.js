@@ -1,9 +1,11 @@
 /* eslint-env node */
 
-const port = 8080
-const webpack = require("webpack")
-const WebpackDevServer = require("webpack-dev-server")
-const config = require("../webpack.config")
+import {routes} from "../package.json"
+import webpack from "webpack"
+import WebpackDevServer from "webpack-dev-server"
+import config from "../webpack.config"
+
+const {hostname, port} = routes.development.views
 
 const server = new WebpackDevServer(webpack(config), {
   historyApiFallback: true,
@@ -19,4 +21,4 @@ const server = new WebpackDevServer(webpack(config), {
   }
 })
 
-server.listen(port, "localhost")
+server.listen(port, hostname)
