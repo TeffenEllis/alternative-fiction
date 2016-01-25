@@ -11,7 +11,7 @@ const headers = {"Cache-Control": `max-age=${cacheTime}, public`}
 gulp.task("deploy", () => {
   const publisher = awspublish.create(config)
 
-  console.log(`Deploying to  ${config.Bucket}`)
+  console.log(`Deploying to  ${config.params.Bucket}`)
 
   gulp.src(`./${buildDirectory}/**`)
     .pipe(awspublish.gzip({ext: ""}))
