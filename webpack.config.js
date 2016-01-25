@@ -6,10 +6,13 @@ const ENVIRONMENT = process.env.NODE_ENV || "development"
 const resolve = require("path").resolve
 const routes = require("./package.json").routes[ENVIRONMENT]
 const metaAttributes = require("./app/resources/meta-attributes.json")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const ProgressBarPlugin = require("progress-bar-webpack-plugin")
 const webpack = require("webpack")
 const formatUrl = require("url").format
+
+const buildDirectory = exports.buildDirectory = "build"
 
 exports.devtool = "source-map"
 
@@ -24,7 +27,7 @@ exports.module = {
 
 exports.output = {
   filename: "[name].js",
-  path: resolve(__dirname, "dist"),
+  path: resolve(__dirname, buildDirectory),
   publicPath: ENVIRONMENT === "production" ? "./" : "/",
   sourceMapFilename: "[name].map"
 }
@@ -42,7 +45,13 @@ exports.plugins = [
     inject: true,
     meta: metaAttributes,
     template: "app/index.html"
-  })
+  }),
+  new CopyWebpackPlugin([
+    {
+      from: "public",
+      to: ""
+    }
+  ])
 ]
 
 exports.resolve = {

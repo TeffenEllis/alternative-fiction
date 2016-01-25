@@ -1,16 +1,19 @@
-var
-  config = require("../config/aws.json"),
-  gulp = require("gulp"),
-  awspublish = require("gulp-awspublish"),
-  cacheTime = 15,
-  headers = {"Cache-Control": "max-age=" + cacheTime + ", public"}
+/* eslint-env node */
 
-gulp.task("deploy", function () {
-  var publisher = awspublish.create(config)
+const buildDirectory = require("../webpack.config.js").buildDirectory
+const config = require("../config/aws.json")
+const gulp = require("gulp")
+const awspublish = require("gulp-awspublish")
 
-  console.log("Deploying to " + config.bucket)
+const cacheTime = 15
+const headers = {"Cache-Control": `max-age=${cacheTime}, public`}
 
-  gulp.src("./dist/**")
+gulp.task("deploy", () => {
+  const publisher = awspublish.create(config)
+
+  console.log(`Deploying to  ${config.Bucket}`)
+
+  gulp.src(`./${buildDirectory}/**`)
     .pipe(awspublish.gzip({ext: ""}))
     .pipe(publisher.publish(headers))
     .pipe(awspublish.reporter())
