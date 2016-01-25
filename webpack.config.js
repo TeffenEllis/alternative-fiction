@@ -7,6 +7,7 @@ const resolve = require("path").resolve
 const routes = require("./package.json").routes[ENVIRONMENT]
 const metaAttributes = require("./app/resources/meta-attributes.json")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const webpack = require("webpack")
 const formatUrl = require("url").format
 
@@ -29,6 +30,7 @@ exports.output = {
 }
 
 exports.plugins = [
+  new ProgressBarPlugin(),
   new webpack.ProvidePlugin({
     fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
   }),
