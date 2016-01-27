@@ -3,7 +3,7 @@ import {api} from "helpers/path"
 import {size} from "lodash"
 import React, {Component} from "react"
 import View from "./stories-listing"
-import ContentPlaceholder from "common/content-placeholder"
+import ContentPlaceholder from "components/content-placeholder"
 
 export default class StoryListingHandler extends Component {
   state = {

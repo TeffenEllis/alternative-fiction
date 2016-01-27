@@ -1,6 +1,6 @@
 import {api} from "helpers/path"
 import React, {Component} from "react"
-import ContentPlaceholder from "common/content-placeholder"
+import ContentPlaceholder from "components/content-placeholder"
 
 export default class StoriesNew extends Component {
   state = {

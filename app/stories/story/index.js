@@ -1,8 +1,8 @@
 import "./story.styl"
 
 import React from "react"
-import HumanTime from "common/human-time"
-import EstimatedReadingTime from "common/estimated-reading-time"
+import HumanTime from "components/human-time"
+import EstimatedReadingTime from "components/estimated-reading-time"
 import ViewControls from "stories/view-controls"
 import FullscreenToggle from "stories/view-controls/fullscreen-toggle"
 import ReadingPreferences from "stories/view-controls/reading-preferences"

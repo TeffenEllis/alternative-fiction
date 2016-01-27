@@ -1,4 +1,4 @@
-import ContentPlaceholder from "common/content-placeholder"
+import ContentPlaceholder from "components/content-placeholder"
 import title from "helpers/title"
 import {api} from "helpers/path"
 import React, {Component} from "react"

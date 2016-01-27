@@ -6,8 +6,8 @@ import show from "./show"
 
 export default {
   edit,
-  index: listing,
-  new: _new,
+  listing,
+  _new,
   routeHandler,
   show
 }

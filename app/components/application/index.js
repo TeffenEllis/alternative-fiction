@@ -1,6 +1,6 @@
 import React, {Component} from "react"
-import SiteMenu from "common/site-menu"
-import SiteNavigation from "common/site-navigation"
+import SiteMenu from "components/site-menu"
+import SiteNavigation from "components/site-navigation"
 import navigation from "resources/navigation"
 
 const NAVIGATION_CLASS = "site-navigation-active"

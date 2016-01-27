@@ -12,8 +12,8 @@ import html2markdown from "html2markdown"
 import {api} from "helpers/path"
 
 import userPreferences from "helpers/user-preferences"
-import HumanTime from "common/human-time"
-import EstimatedReadingTime from "common/estimated-reading-time"
+import HumanTime from "components/human-time"
+import EstimatedReadingTime from "components/estimated-reading-time"
 import validations from "./validations"
 
 import ViewControls from "stories/view-controls"

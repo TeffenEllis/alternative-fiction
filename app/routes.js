@@ -1,6 +1,6 @@
 import React from "react"
-import Application from "common/application"
-import ApplicationError from "common/application-error"
+import Application from "components/application"
+import ApplicationError from "components/application-error"
 import stories from "stories"
 import {IndexRoute, Route} from "react-router"
 
@@ -8,9 +8,9 @@ export default (<Route component={Application} path="/">
   <IndexRoute component={ApplicationError} />
 
   <Route component={stories.routeHandler} path="stories(/)">
-    <IndexRoute component={stories.index} />
+    <IndexRoute component={stories.listing} />
 
-    <Route component={stories.new} path="new" />
+    <Route component={stories._new} path="new" />
     <Route component={stories.show} path=":id" />
     <Route component={stories.edit} path=":id/edit" />
   </Route>

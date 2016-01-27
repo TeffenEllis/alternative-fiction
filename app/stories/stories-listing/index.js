@@ -5,7 +5,7 @@
 import React, {Component} from "react"
 
 import {Link} from "react-router"
-import HumanTime from "common/human-time"
+import HumanTime from "components/human-time"
 
 export default class StoriesListing extends Component {
   deleteStory(id) {
