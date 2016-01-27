@@ -13,10 +13,10 @@ export default class Application extends Component {
       <SiteNavigation navigationItems={navigation.items} onNavigation={this.setNavigationClass.bind(this, "remove")} />
       <aside className="site-navigation-overlay" onClick={this.setNavigationClass.bind(this, "remove")} />
 
-      <main id="main-content">
+      <div id="main-content">
         <SiteMenu onNavigation={this.setNavigationClass.bind(this, "add")} />
         {this.props.children}
-      </main>
+      </div>
     </div>
   }
 
