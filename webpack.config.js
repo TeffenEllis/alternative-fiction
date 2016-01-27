@@ -28,7 +28,7 @@ exports.module = {
 exports.output = {
   filename: "[name].js",
   path: resolve(__dirname, buildDirectory),
-  publicPath: ENVIRONMENT === "production" ? "./" : "/",
+  publicPath: "/",
   sourceMapFilename: "[name].map"
 }
 
@@ -42,9 +42,8 @@ exports.plugins = [
     __VIEWS_PATH: JSON.stringify(formatUrl(routes.views))
   }),
   new HtmlWebpackPlugin({
-    inject: true,
     meta: metaAttributes,
-    template: "app/index.html"
+    template: "app/index.ejs"
   }),
   new CopyWebpackPlugin([
     {
