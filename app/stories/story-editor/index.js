@@ -9,7 +9,7 @@ import MediumEditor from "medium-editor"
 import MEDIUM_OPTIONS from "resources/medium-editor-configuration"
 import markdown from "helpers/markdown"
 import html2markdown from "html2markdown"
-import {api} from "helpers/path"
+import request from "lib/request"
 
 import userPreferences from "helpers/user-preferences"
 import HumanTime from "components/human-time"
@@ -146,12 +146,8 @@ export default React.createClass({
 
     const {body, description, title, uuid} = this.state.story
 
-    fetch(api(`stories/${uuid}`), {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
+    request(`stories/${uuid}`, {
+      method: "PATCH",
       body: JSON.stringify({story: {title, description, body}})
     })
     .then(() => this.setState({isSaving: false, isSaved: true}))

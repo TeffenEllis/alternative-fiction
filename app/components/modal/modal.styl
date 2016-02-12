@@ -1,0 +1,52 @@
+json("theme.json")
+
+[data-component="modal"]
+  align-items center
+  background rgba(0, 0, 0, 0.11)
+  bottom 0
+  display flex
+  justify-content center
+  left 0
+  position fixed
+  right 0
+  top 0
+  z-index priority-high
+
+  &[data-type="info"] .dialog .header
+    border-bottom-color brand-info
+
+  &[data-type="error"] .dialog .header
+    border-bottom-color brand-danger
+
+  &[data-type="warning"] .dialog .header
+    border-bottom-color brand-warning
+
+  .dialog
+    background-color black
+    border 4px double white
+    color white
+    border-radius 3px
+    font-family font-accent
+    padding 0.5em
+
+    .header
+      border-bottom 1px solid white
+      font-variant small-caps
+      font-weight 200
+      justify-content center
+      line-height 2.5
+      margin 0 1em
+
+    .body
+      align-items center
+      justify-content center
+      margin 0.5em 1em
+
+    .actions
+      justify-content center
+      padding-bottom 0.5em
+
+      .btn + .btn
+        margin-left 70px
+
+

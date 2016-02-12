@@ -1,4 +1,4 @@
-import {api} from "helpers/path"
+import request from "lib/request"
 import React, {Component} from "react"
 import ContentPlaceholder from "components/content-placeholder"
 
@@ -18,16 +18,8 @@ export default class StoriesNew extends Component {
   }
 
   componentWillMount() {
-    fetch(api("stories"), {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-    .then(response => response.json())
-    .then(story => this.setState({story}))
-    .catch(error => console.error(error))
+    request("stories", {method: "POST"})
+      .then(story => this.setState({story}))
   }
 
   render() {

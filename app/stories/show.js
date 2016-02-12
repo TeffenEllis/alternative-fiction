@@ -1,6 +1,6 @@
 import ContentPlaceholder from "components/content-placeholder"
 import title from "helpers/title"
-import {api} from "helpers/path"
+import request from "lib/request"
 import React, {Component} from "react"
 import View from "./story"
 
@@ -14,8 +14,7 @@ export default class StoriesShow extends Component {
   }
 
   componentWillMount() {
-    fetch(api(`stories/${this.props.params.id}`))
-      .then(response => response.json())
+    request(`stories/${this.props.params.id}`)
       .then(story => this.setState({story}))
   }
 

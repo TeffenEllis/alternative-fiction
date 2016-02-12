@@ -2,55 +2,65 @@
 // Arguments:
 // * Stories: Array.
 
-import React, {Component} from "react"
-
-import {Link} from "react-router"
 import HumanTime from "components/human-time"
+import Modal from "components/modal"
+import request from "lib/request"
+import React, {Component} from "react"
+import {Link} from "react-router"
 
 export default class StoriesListing extends Component {
-  deleteStory(id) {
-    const storyRef = this.props.storiesRef.child(id)
+  state = {
+    uuidPendingDestruction: null
+  };
 
-    storyRef.remove(error => {
-      if (error) return console.error(error)
+  _destroyStory(uuid) {
+    request(`stories/${uuid}`, {method: "DELETE"})
+      .then(() => this.props.onChange())
+  }
 
-      this.props.onChange()
-    })
+  _setStoryDestruction(uuid) {
+    this.setState({uuidPendingDestruction: uuid})
   }
 
   render() {
     const {stories} = this.props
 
-    return <table className="table stories">
-      <thead>
-        <tr>
-          <th className="id">ID</th>
-          <th className="title">Title</th>
-          <th className="description">Description</th>
-          <th className="updated-at">Updated</th>
-          <th className="created-at">Created</th>
-          <th className="delete-story">Delete</th>
-        </tr>
-      </thead>
+    return <div>
+      {this.state.uuidPendingDestruction && this.renderDestructionConfirmation()}
 
-      <tbody>
-        {stories.map(story => this.renderRow(story))}
-      </tbody>
-    </table>
+      <table className="table stories">
+        <thead>
+          <tr>
+            <th className="id">ID</th>
+            <th className="title">Title</th>
+            <th className="description">Description</th>
+            <th className="updated-at">Updated</th>
+            <th className="created-at">Created</th>
+            <th className="delete-story">Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {stories.map(story => this.renderRow(story))}
+        </tbody>
+      </table>
+    </div>
   }
 
-  renderDeleteConfirmation(id, story) {
-    const actions = <div>
-      <span className="btn dark btn-danger" onClick={this.deleteStory.bind(this, id)}>Yes</span>
-      <span className="btn dark btn-primary" data-dismiss="modal">No</span>
-    </div>
+  renderDestructionConfirmation() {
+    const {uuidPendingDestruction} = this.state
+    const {title, uuid} = this.props.stories.find(({uuid}) => uuid === uuidPendingDestruction)
+    const cancelDestruction = this._setStoryDestruction.bind(this, null)
 
-    const confirmationModal = <Modal actions={actions} title="Confirm Deletion" type="warning">
-      <p key="text">{"Are you sure you want to delete"}</p>
-      <p key="title">{`"${story.title}"?`}</p>
+    const actions = [
+      <span className="btn dark btn-danger" key="destroy" onClick={this._destroyStory.bind(this, uuid)}>Delete</span>,
+      <span className="btn dark btn-primary" key="cancel" onClick={cancelDestruction}>Cancel</span>
+    ]
+
+    return <Modal actions={actions} onDismiss={cancelDestruction} title="Confirm Deletion" type="warning">
+      <span key="text">{"Are you sure you want to delete"}</span>
+      <span key="title">{`"${title}"?`}</span>
     </Modal>
-
-    React.render(confirmationModal, document.querySelector("#above-content"))
   }
 
   renderRow({uuid, ...story}) {
@@ -77,7 +87,7 @@ export default class StoriesListing extends Component {
         <HumanTime datetime={story.createdAt} />
       </td>
 
-      <td className="link delete-story">
+      <td className="link delete-story" onClick={this._setStoryDestruction.bind(this, uuid)}>
         Delete
       </td>
     </tr>

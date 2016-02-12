@@ -1,9 +1,10 @@
 // User preferences object.
-import LocalPreferences from "local-preferences"
+import {get} from "local-preferences"
 
-export default new LocalPreferences({
-  stories: {
+export default {
+  stories: get("stories", {
     fontSize: "normal",
     paragraphWidth: "normal"
-  }
-}, "userPreferences")
+  }),
+  token: get("token", null)
+}

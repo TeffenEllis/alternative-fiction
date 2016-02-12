@@ -1,7 +1,7 @@
 import ContentPlaceholder from "components/content-placeholder"
 import React, {Component} from "react"
 import title from "helpers/title"
-import {api} from "helpers/path"
+import request from "lib/request"
 import View from "./story-editor"
 
 export default class StoryEdit extends Component {
@@ -14,8 +14,7 @@ export default class StoryEdit extends Component {
   }
 
   componentWillMount() {
-    fetch(api(`stories/${this.props.params.id}`))
-      .then(response => response.json())
+    request(`stories/${this.props.params.id}`)
       .then(story => this.setState({story}))
   }
 
