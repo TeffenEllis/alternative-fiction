@@ -19,7 +19,7 @@ export default React.createClass({
     const {fontSize, paragraphWidth} = userPreferences.stories
     const {story} = this.props
 
-    return <section data-component="story" data-component-mode="view">
+    return <section data-column data-component="story" data-component-mode="view">
       <ViewControls
         primaryControls={[
           <EstimatedReadingTime textComponent={this.refs.body} trackScrollPosition />,

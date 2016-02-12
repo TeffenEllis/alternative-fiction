@@ -47,7 +47,7 @@ export default React.createClass({
   render() {
     const {paragraphWidth, fontSize} = userPreferences.stories
 
-    return <div className="view-control" data-component="reading-preferences">
+    return <div className="view-control" data-column data-component="reading-preferences">
       <div className="preference paragraph-width">
         <span className="glyphicon glyphicon-resize-horizontal preference-label" />
         <input

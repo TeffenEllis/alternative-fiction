@@ -4,6 +4,7 @@ json("theme.json")
 $icon-font-name = "glyphicons-halflings-regular"
 $icon-font-path = "//netdna.bootstrapcdn.com/bootstrap/3.3.2/fonts/"
 @import "~bootstrap-styl/bootstrap/glyphicons.styl"
+@import "./buttons"
 
 *, *:before, *:after
   box-sizing border-box
@@ -50,11 +51,11 @@ a, .action
 main
   min-height 100%
 
-[data-component], header, section, aside, footer
+div, section
   display flex
-  flex-direction column
-  align-items stretch
-  flex-shrink 0
+
+[data-column]
+  flex-flow column nowrap
 
 [data-selectable], [contenteditable]
   cursor text

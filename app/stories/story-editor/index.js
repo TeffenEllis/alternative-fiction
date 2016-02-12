@@ -88,7 +88,7 @@ export default React.createClass({
   render() {
     const {fontSize, paragraphWidth} = userPreferences.stories
 
-    return <section data-component="story-editor" data-component-mode="edit">
+    return <section data-column data-component="story-editor" data-component-mode="edit">
       <ViewControls
         primaryControls={[
           <SavedState isSaved={this.state.isSaved} isSaving={this.state.isSaving} />,

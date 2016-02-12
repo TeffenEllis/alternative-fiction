@@ -6,7 +6,7 @@ import {Link} from "react-router"
 export default React.createClass({
   render() {
     return <nav className="no-print" data-component="site-navigation">
-      <section className="list-group">
+      <section className="list-group" data-column>
         {this.renderItems()}
       </section>
     </nav>

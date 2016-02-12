@@ -23,7 +23,7 @@ export default class ApplicationError extends Component {
   }
 
   render() {
-    return <div data-code={this.props.code} data-component="application-error">
+    return <div data-code={this.props.code} data-column data-component="application-error">
       <h1>
         {this.getStatusCode()}
       </h1>

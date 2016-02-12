@@ -3,6 +3,7 @@ json("theme.json")
 @import "./story-body.styl"
 
 [data-component^="story"]
+  flex 1 1 auto
   margin 16px auto
 
   [data-placeholder]:empty:not(:focus):before
@@ -17,9 +18,11 @@ json("theme.json")
       font-family font-serif
       font-weight bold
       font-size 2em
+      justify-content center
 
     .description
       font-style italic
+      justify-content center
       color gray-dark
 
     .section-seperator
