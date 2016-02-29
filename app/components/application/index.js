@@ -1,16 +1,13 @@
 import React, {Component} from "react"
 import SiteMenu from "components/site-menu"
-import SiteNavigation from "components/site-navigation"
-import navigation from "resources/navigation"
+import SiteNavigation from "containers/site-navigation"
 
 const NAVIGATION_CLASS = "site-navigation-active"
 
 export default class Application extends Component {
   render() {
     return <div className="application-root">
-      <div id="above-content" />
-
-      <SiteNavigation navigationItems={navigation.items} onNavigation={this.setNavigationClass.bind(this, "remove")} />
+      <SiteNavigation onNavigation={this.setNavigationClass.bind(this, "remove")} />
       <aside className="site-navigation-overlay" onClick={this.setNavigationClass.bind(this, "remove")} />
 
       <div id="main-content">
