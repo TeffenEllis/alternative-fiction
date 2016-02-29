@@ -14,12 +14,13 @@ types = {
   border-bottom 1px solid white
   border-radius 0
   cursor pointer
+  justify-content center
   padding 4px 16px
 
 for type, color in types
   .btn.btn-{type}
     color black
-    background body-bg
+    background application-background
     border-bottom-color color
 
     &:hover

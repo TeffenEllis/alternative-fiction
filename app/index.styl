@@ -5,6 +5,7 @@ $icon-font-name = "glyphicons-halflings-regular"
 $icon-font-path = "//netdna.bootstrapcdn.com/bootstrap/3.3.2/fonts/"
 @import "~bootstrap-styl/bootstrap/glyphicons.styl"
 @import "./buttons"
+@import "./forms"
 
 *, *:before, *:after
   box-sizing border-box
@@ -13,7 +14,7 @@ html, body
  height 100%
 
 body
-  background white
+  background application-background
 
   cursor default
 
@@ -29,9 +30,16 @@ a, .action
   color brand-primary
   text-decoration none
 
+  &.deemphasized
+    font-style italic
+    opacity 0.65
+
+    &:hover
+      opacity 1
+
   &:hover
     cursor pointer
-    text-decoration underlins
+    text-decoration underline
 
 .mask
   display block

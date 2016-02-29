@@ -7,7 +7,9 @@ import "lib/fullscreen-polyfill/register"
 import React from "react"
 import {render} from "react-dom"
 import routes from "./routes"
+import {Provider} from "react-redux"
 import {browserHistory, Router} from "react-router"
+import store from "./store"
 
 document.head.appendChild(Object.assign(document.createElement("link"), {
   rel: "shortcut icon",
@@ -17,7 +19,8 @@ document.head.appendChild(Object.assign(document.createElement("link"), {
 }))
 
 document.addEventListener("DOMContentLoaded", () => {
-  render(<Router history={browserHistory}>
-    {routes}
-  </Router>, document.querySelector("main"))
+  render(<Provider store={store}>
+    <Router history={browserHistory}>{routes}</Router>
+  </Provider>,
+  document.querySelector("main"))
 })
