@@ -88,7 +88,7 @@ export default React.createClass({
   render() {
     const {fontSize, paragraphWidth} = userPreferences.stories
 
-    return <section data-column data-component="story-editor" data-component-mode="edit">
+    return <section data-column data-component="full-story-editor" data-component-mode="edit">
       <ViewControls
         primaryControls={[
           <SavedState isSaved={this.state.isSaved} isSaving={this.state.isSaving} />,
@@ -101,7 +101,7 @@ export default React.createClass({
         ]}
       />
 
-      <header className="headline">
+      <div className="details" data-column>
         <div
           className="title"
           contentEditable
@@ -125,7 +125,7 @@ export default React.createClass({
         </div>
         <HumanTime datetime={this.state.story.updatedAt} />
         <hr className="section-seperator" />
-      </header>
+      </div>
 
       <article
         className="body"

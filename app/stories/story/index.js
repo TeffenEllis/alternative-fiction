@@ -19,7 +19,7 @@ export default React.createClass({
     const {fontSize, paragraphWidth} = userPreferences.stories
     const {story} = this.props
 
-    return <section data-column data-component="story" data-component-mode="view">
+    return <section data-column data-component="full-story" data-component-mode="view">
       <ViewControls
         primaryControls={[
           <EstimatedReadingTime textComponent={this.refs.body} trackScrollPosition />,
@@ -31,7 +31,7 @@ export default React.createClass({
         ]}
       />
 
-      <header className="headline">
+      <div className="details" data-column>
         <div className="title" data-placeholder="untitled" data-selectable ref="title">
           {story.title}
         </div>
@@ -50,7 +50,7 @@ export default React.createClass({
 
         <HumanTime datetime={story.updatedAt} />
         <hr className="section-seperator" />
-      </header>
+      </div>
 
       <article
         className="body"

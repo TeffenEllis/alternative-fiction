@@ -4,7 +4,7 @@ import listing from "./listing"
 import _new from "./new"
 import show from "./show"
 
-export default {
+export {
   edit,
   listing,
   _new,

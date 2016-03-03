@@ -2,28 +2,27 @@ json("theme.json")
 
 @import "./story-body.styl"
 
-[data-component="story-editor"],
-[data-component="story"]
+[data-component^="full-story"]
   flex 1 1 auto
-  margin 16px auto
+  margin 16px 0
 
   [data-placeholder]:empty:not(:focus):before
     content attr(data-placeholder)
     color  gray-light
     cursor text
 
-  .headline
+  .details
+    align-items center
     text-align center
 
     .title
       font-family font-serif
       font-weight bold
       font-size 2em
-      justify-content center
+      max-width 80%
 
     .description
       font-style italic
-      justify-content center
       color gray-dark
 
     .section-seperator
