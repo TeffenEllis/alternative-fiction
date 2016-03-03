@@ -3,18 +3,23 @@
   "disableDoubleReturn": true,
   "firstHeader": "h1",
   "secondHeader": "h2",
-  "buttons": [
-    "bold",
-    "italic",
-    "underline",
-    "quote",
-    "header1",
-    "header2"
-  ],
+  "toolbar": {
+    "buttons": [
+      "bold",
+      "italic",
+      "underline",
+      "quote",
+      "h1",
+      "h2"
+    ],
 
-  "buttonLabels": {
-    "bold": "<span class='glyphicon glyphicon-bold'></span>",
-    "italic": "<span class='glyphicon glyphicon-italic'></span>",
-    "bold": "<span class='glyphicon glyphicon-bold'></span>"
+    "buttonLabels": {
+      "bold": "<span class='glyphicon glyphicon-bold'></span>",
+      "italic": "<span class='glyphicon glyphicon-italic'></span>",
+      "bold": "<span class='glyphicon glyphicon-bold'></span>"
+    }
+  },
+  "placeholder": {
+    "text": ""
   }
 }
