@@ -18,7 +18,7 @@
   "application-background": "#fff",
 
   "gray": {
-    "lighter": "#eee",
+    "lighter": "#dcdcdc",
     "light": "#777",
     "base": "#555",
     "dark": "#333",

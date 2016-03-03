@@ -1,0 +1,19 @@
+json("theme.json")
+
+[data-component="story-card"]
+  flex 0 0 auto
+  max-width 100%
+  width 700px
+
+  & + [data-component="story-card"]
+    border-top 1px solid gray-lighter
+    margin-top 1em
+
+  .title
+    font-family font-serif
+    font-weight bold
+    font-size 1.5em
+
+  .primary-details
+    font-style italic
+    color gray-dark

@@ -148,7 +148,7 @@ export default React.createClass({
 
     request(`stories/${uuid}`, {
       method: "PATCH",
-      body: {story: {title, description, body}}
+      body: {title, description, body}
     })
     .then(() => this.setState({isSaving: false, isSaved: true}))
     .catch(error => {

@@ -2,8 +2,11 @@
 // Arguments:
 // * Stories: Array.
 
+import "./stories-listing.styl"
+
 import HumanTime from "components/human-time"
 import Modal from "components/modal"
+import StoryCard from "components/story-card"
 import request from "lib/request"
 import React, {Component} from "react"
 import {Link} from "react-router"
@@ -25,25 +28,12 @@ export default class StoriesListing extends Component {
   render() {
     const {stories} = this.props
 
-    return <div>
+    return <div data-column data-component="stories-listing">
       {this.state.uuidPendingDestruction && this.renderDestructionConfirmation()}
 
-      <table className="table stories">
-        <thead>
-          <tr>
-            <th className="id">ID</th>
-            <th className="title">Title</th>
-            <th className="description">Description</th>
-            <th className="updated-at">Updated</th>
-            <th className="created-at">Created</th>
-            <th className="delete-story">Delete</th>
-          </tr>
-        </thead>
+      <div className="headline">Recent Stories</div>
 
-        <tbody>
-          {stories.map(story => this.renderRow(story))}
-        </tbody>
-      </table>
+      {stories.map(story => <StoryCard key={story.uuid} story={story} />)}
     </div>
   }
 
