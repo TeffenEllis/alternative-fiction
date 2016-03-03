@@ -8,7 +8,14 @@ export default [
   {
     label: "Search",
     icon: "search",
-    path: "/"
+    path: "/search"
+  },
+
+  {
+    label: "Library",
+    icon: "book",
+    path: "/",
+    requireAuthentication: true
   },
 
   {
@@ -21,13 +28,6 @@ export default [
   {
     label: "Settings",
     icon: "wrench",
-    path: "/",
-    requireAuthentication: true
-  },
-
-  {
-    label: "Library",
-    icon: "book",
     path: "/",
     requireAuthentication: true
   }

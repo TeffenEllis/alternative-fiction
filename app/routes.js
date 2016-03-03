@@ -7,7 +7,7 @@ import * as stories from "stories"
 import {IndexRoute, Route} from "react-router"
 
 export default (<Route component={Application} path="/">
-  <IndexRoute component={ApplicationError} />
+  <IndexRoute component={stories.listing} />
 
   <Route component={Authenticate} path="auth" />
   <Route component={Search} path="search" />
