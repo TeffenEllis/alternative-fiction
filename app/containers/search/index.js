@@ -1,5 +1,6 @@
 import "./search.styl"
 
+import title from "helpers/title"
 import request from "lib/request"
 import StoryCard from "components/story-card"
 import React, {Component} from "react"
@@ -53,10 +54,12 @@ export default class Search extends Component {
   }
 
   componentDidMount() {
-    if (this.state.criteria.length === 0) return
+    document.title = title("Story search")
 
-    this.refs.searchInput.select()
-    this._fetchResults()
+    if (this.state.criteria.length > 0) {
+      this.refs.searchInput.select()
+      this._fetchResults()
+    }
   }
 
   render() {
