@@ -26,12 +26,20 @@ class SiteNavigation extends Component {
   }
 
   render() {
-    return <nav className="no-print" data-component="site-navigation">
-      <section className="list-group" data-column>
+    return <section className="no-print" data-column data-component="site-navigation">
+      <div className="list-group" data-column>
         {this.renderItems()}
         {this.renderAuth()}
-      </section>
-    </nav>
+      </div>
+
+      <div className="list-group" data-column>
+        <ListGroupItem
+          icon="heart"
+          label="Contribute"
+          path="https://github.com/alternative-fiction"
+        />
+      </div>
+    </section>
   }
 
   renderAuth() {
@@ -55,6 +63,7 @@ class SiteNavigation extends Component {
         key={index}
         label={item.label}
         onClick={this._handleNavigation.bind(this, item)}
+        path={item.path}
       />
     )
   }
