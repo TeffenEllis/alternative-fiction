@@ -14,7 +14,7 @@ export default [
   {
     label: "Library",
     icon: "book",
-    path: "/",
+    path: "/library",
     requireAuthentication: true
   },
 

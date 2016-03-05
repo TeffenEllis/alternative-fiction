@@ -9,9 +9,8 @@ class SiteNavigation extends Component {
     router: React.PropTypes.object.isRequired
   };
 
-  _handleNavigation(item) {
-    // TODO: pass where they were going.
-    const path = !item.requireAuthentication || this.props.token ? item.path : `/auth?redirectTo=${item.path}`
+  _handleNavigation({path, requireAuthentication}) {
+    if (requireAuthentication && !this.props.user) path = `/auth?redirectTo=${path}`
 
     this.context.router.push(path)
     this.props.onNavigation()
@@ -43,7 +42,7 @@ class SiteNavigation extends Component {
 
 function mapStateToProps(state) {
   return {
-    token: state.session.token
+    user: state.session.user
   }
 }
 
