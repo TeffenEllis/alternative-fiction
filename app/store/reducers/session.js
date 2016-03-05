@@ -18,9 +18,13 @@ export default function sessionReducer(state = defaultState, action) {
   }
 
   if (action.type === "UNAUTHENTICATE_SESSION") {
+    setPersisted("token", null)
+    setPersisted("user", null)
+
     return {
       ...state,
-      token: null
+      token: null,
+      user: action.user
     }
   }
 

@@ -23,12 +23,5 @@ export default [
     icon: "file",
     path: "/stories/new",
     requireAuthentication: true
-  },
-
-  {
-    label: "Settings",
-    icon: "wrench",
-    path: "/",
-    requireAuthentication: true
   }
 ]

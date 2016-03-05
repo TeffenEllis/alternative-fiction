@@ -1,8 +1,11 @@
 import "./site-navigation.styl"
 
+import navigationItems from "./items"
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import navigationItems from "./items"
+import {bindActionCreators} from "redux"
+import * as sessionActionCreators from "store/action-creators/session"
+import ListGroupItem from "./list-group-item"
 
 class SiteNavigation extends Component {
   static contextTypes = {
@@ -16,27 +19,50 @@ class SiteNavigation extends Component {
     this.props.onNavigation()
   }
 
+  _unauthenticate() {
+    this.props.sessionActions.unauthenticate()
+    this.context.router.push("/")
+    this.props.onNavigation()
+  }
+
   render() {
     return <nav className="no-print" data-component="site-navigation">
       <section className="list-group" data-column>
         {this.renderItems()}
+        {this.renderAuth()}
       </section>
     </nav>
   }
 
+  renderAuth() {
+    if (this.props.user) return <ListGroupItem
+      icon="log-out"
+      label="Log out"
+      onClick={this._unauthenticate.bind(this)}
+    />
+
+    return <ListGroupItem
+      icon="log-in"
+      label="Log in"
+      onClick={this._handleNavigation.bind(this, {path: "/auth"})}
+    />
+  }
+
   renderItems() {
     return navigationItems.map((item, index) =>
-      <div
-        className="list-group-item"
+      <ListGroupItem
+        icon={item.icon}
         key={index}
-        onClick={this._handleNavigation.bind(this, item)}>
-        <span className={`accent glyphicon glyphicon-${item.icon}`} />
-
-        <span className="item-label">
-          {item.label}
-        </span>
-      </div>
+        label={item.label}
+        onClick={this._handleNavigation.bind(this, item)}
+      />
     )
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    sessionActions: bindActionCreators(sessionActionCreators, dispatch)
   }
 }
 
@@ -46,4 +72,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(SiteNavigation)
+export default connect(mapStateToProps, mapDispatchToProps)(SiteNavigation)

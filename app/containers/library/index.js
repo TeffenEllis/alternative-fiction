@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import ContentPlaceholder from "components/content-placeholder"
 
 class Library extends Component {
   static contextTypes = {

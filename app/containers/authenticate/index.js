@@ -4,7 +4,7 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 import request from "../../lib/request"
-import * as sessionActionCreators from "../../store/action-creators/session"
+import * as sessionActionCreators from "store/action-creators/session"
 import getForms from "./get-forms"
 
 class Authenticate extends Component {
@@ -63,7 +63,9 @@ class Authenticate extends Component {
         user: payload
       })
 
-      this.context.router.push(query.redirectTo)
+      const {redirectTo = "/"} = query
+
+      this.context.router.push(redirectTo)
     })
   }
 
