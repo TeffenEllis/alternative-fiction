@@ -16,9 +16,9 @@ import HumanTime from "components/human-time"
 import EstimatedReadingTime from "components/estimated-reading-time"
 import validations from "./validations"
 
-import ViewControls from "stories/view-controls"
-import ReadingPreferences from "stories/view-controls/reading-preferences"
-import SavedState from "stories/view-controls/save-state"
+import ViewControls from "containers/stories/view-controls"
+import ReadingPreferences from "containers/stories/view-controls/reading-preferences"
+import SavedState from "containers/stories/view-controls/save-state"
 
 
 const UPDATE_THROTTLE = 1500

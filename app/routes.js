@@ -2,8 +2,8 @@ import React from "react"
 import Application from "components/application"
 import Authenticate from "containers/authenticate"
 import Search from "containers/search"
+import * as stories from "containers/stories"
 import ApplicationError from "components/application-error"
-import * as stories from "stories"
 import {IndexRoute, Route} from "react-router"
 
 export default (<Route component={Application} path="/">
