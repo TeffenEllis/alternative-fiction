@@ -1,4 +1,4 @@
-import userPreferences from "lib/user-preferences"
+import {get} from "local-preferences"
 import {defaults} from "lodash"
 
 function checkStatus(response) {
@@ -19,7 +19,7 @@ export default function request(path = "", options = {}) {
   defaults(options, {
     headers: {
       Accept: "application/json",
-      Authorization: userPreferences.token || "",
+      Authorization: get("token", ""),
       "Content-Type": "application/json"
     }
   })
