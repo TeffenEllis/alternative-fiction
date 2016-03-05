@@ -2,7 +2,7 @@ export default [
   {
     label: "Stories",
     icon: "list-alt",
-    path: "/stories"
+    path: "/"
   },
 
   {
