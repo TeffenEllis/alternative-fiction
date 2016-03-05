@@ -5,16 +5,18 @@
     "node": true
   },
   "extends": "eslint:recommended",
-  "ecmaVersion": 6,
+  "ecmaVersion": 7,
   "globals": {
     "__SERVICES_PATH": false,
     "__VIEWS_PATH": false
   },
   "parser": "babel-eslint",
   "plugins": [
+    "babel",
     "eslint-plugin-react"
   ],
   "rules": {
+    "babel/object-curly-spacing": [1, "never"],
     "array-bracket-spacing": [1, "never"],
     "arrow-parens": [1, "as-needed"],
     "arrow-spacing": [1, {
@@ -112,7 +114,6 @@
     "no-var": 2,
     "no-void": 1,
     "no-with": 2,
-    "object-curly-spacing": [1, "never"],
     "object-shorthand": [1, "always"],
     "one-var": [1, {
       "let": "never",
