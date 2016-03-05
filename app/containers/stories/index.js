@@ -1,13 +1,4 @@
-import routeHandler from "./route-handler"
-import edit from "./edit"
-import listing from "./listing"
-import _new from "./new"
-import show from "./show"
-
-export {
-  edit,
-  listing,
-  _new,
-  routeHandler,
-  show
-}
+export edit from "./edit"
+export listing from "./listing"
+export _new from "./new"
+export show from "./show"
