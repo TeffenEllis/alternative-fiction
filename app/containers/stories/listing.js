@@ -1,5 +1,5 @@
-import title from "helpers/title"
 import request from "lib/request"
+import title from "lib/title"
 import {size} from "lodash"
 import React, {Component} from "react"
 import View from "./stories-listing"

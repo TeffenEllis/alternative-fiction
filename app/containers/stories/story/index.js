@@ -6,8 +6,8 @@ import EstimatedReadingTime from "components/estimated-reading-time"
 import ViewControls from "containers/stories/view-controls"
 import FullscreenToggle from "containers/stories/view-controls/fullscreen-toggle"
 import ReadingPreferences from "containers/stories/view-controls/reading-preferences"
-import userPreferences from "helpers/user-preferences"
-import markdown from "helpers/markdown"
+import userPreferences from "lib/user-preferences"
+import markdown from "lib/markdown"
 
 export default React.createClass({
   componentDidMount() {

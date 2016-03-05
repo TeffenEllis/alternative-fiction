@@ -1,6 +1,6 @@
 import ContentPlaceholder from "components/content-placeholder"
-import title from "helpers/title"
 import request from "lib/request"
+import title from "lib/title"
 import React, {Component} from "react"
 import View from "./story"
 

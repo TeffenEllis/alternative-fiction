@@ -1,4 +1,4 @@
-import userPreferences from "../helpers/user-preferences"
+import userPreferences from "lib/user-preferences"
 import {defaults} from "lodash"
 
 function checkStatus(response) {

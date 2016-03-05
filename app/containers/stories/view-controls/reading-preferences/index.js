@@ -6,7 +6,7 @@
 import "./reading-preferences.styl"
 
 import React from "react"
-import userPreferences from "helpers/user-preferences"
+import userPreferences from "lib/user-preferences"
 
 const preferenceToInt = {
   paragraphWidth: {

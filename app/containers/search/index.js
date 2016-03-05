@@ -1,7 +1,7 @@
 import "./search.styl"
 
-import title from "helpers/title"
 import request from "lib/request"
+import title from "lib/title"
 import StoryCard from "components/story-card"
 import React, {Component} from "react"
 import keyMap from "resources/key-map"

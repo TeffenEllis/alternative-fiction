@@ -1,7 +1,7 @@
 // Fullscreen toggle button.
 
 import React from "react"
-import fullscreenHelper from "helpers/fullscreen"
+import fullscreenHelper from "lib/fullscreen"
 
 export default React.createClass({
   componentDidMount() {

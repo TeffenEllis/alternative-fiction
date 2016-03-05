@@ -1,7 +1,7 @@
 import "./application-error.styl"
 
 import React, {Component} from "react"
-import title from "helpers/title"
+import title from "lib/title"
 
 export default class ApplicationError extends Component {
   componentDidMount() {

@@ -1,7 +1,7 @@
 import ContentPlaceholder from "components/content-placeholder"
 import React, {Component} from "react"
-import title from "helpers/title"
 import request from "lib/request"
+import title from "lib/title"
 import View from "./story-editor"
 
 export default class StoryEdit extends Component {
