@@ -39,7 +39,8 @@ exports.plugins = [
   }),
   new webpack.DefinePlugin({
     __SERVICES_PATH: JSON.stringify(formatUrl(routes.services)),
-    __VIEWS_PATH: JSON.stringify(formatUrl(routes.views))
+    __VIEWS_PATH: JSON.stringify(formatUrl(routes.views)),
+    "process.env.NODE_ENV": JSON.stringify(ENVIRONMENT)
   }),
   new HtmlWebpackPlugin({
     meta: metaAttributes,
