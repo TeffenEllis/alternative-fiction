@@ -1,6 +1,6 @@
 json("theme.json")
 
-$navigation-width = 150px
+$navigation-width = 140px
 
 [data-component="site-navigation"]
   background-color black
@@ -13,8 +13,10 @@ $navigation-width = 150px
   width $navigation-width
 
   .list-group-item
+    align-items center
     color gray-light
     cursor pointer
+    display flex
     padding 13px 0
     padding-left 13px
     text-decoration none
@@ -23,7 +25,7 @@ $navigation-width = 150px
       font-size 1.1em
 
     .accent
-      margin-right 15px
+      margin-right 12px
 
     &:first-child
       padding-top 20px

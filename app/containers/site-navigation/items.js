@@ -12,7 +12,7 @@ export default [
   },
 
   {
-    label: "Library",
+    label: "My Library",
     icon: "book",
     path: "/library",
     requireAuthentication: true
