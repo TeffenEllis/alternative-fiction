@@ -7,6 +7,12 @@ import {bindActionCreators} from "redux"
 import * as sessionActionCreators from "store/action-creators/session"
 import ListGroupItem from "./list-group-item"
 
+const contribute = {
+  icon: "heart",
+  label: "Contribute",
+  path: "/contribute"
+}
+
 class SiteNavigation extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -33,10 +39,8 @@ class SiteNavigation extends Component {
       </div>
 
       <div className="list-group" data-column>
-        <ListGroupItem
-          icon="heart"
-          label="Contribute"
-          path="https://github.com/alternative-fiction"
+        <ListGroupItem {...contribute}
+          onClick={this._handleNavigation.bind(this, {path: contribute.path})}
         />
       </div>
     </section>
@@ -58,12 +62,9 @@ class SiteNavigation extends Component {
 
   renderItems() {
     return navigationItems.map((item, index) =>
-      <ListGroupItem
-        icon={item.icon}
+      <ListGroupItem {...item}
         key={index}
-        label={item.label}
         onClick={this._handleNavigation.bind(this, item)}
-        path={item.path}
       />
     )
   }

@@ -1,6 +1,7 @@
 import React from "react"
 import Application from "components/application"
 import Authenticate from "containers/authenticate"
+import Contribute from "containers/contribute"
 import Search from "containers/search"
 import Library from "containers/library"
 import * as stories from "containers/stories"
@@ -14,6 +15,7 @@ export default (<Route component={Application} path="/">
   <IndexRoute component={stories.listing} />
 
   <Route component={Authenticate} path="auth" />
+  <Route component={Contribute} path="contribute" />
   <Route component={Library} path="library" />
   <Route component={Search} path="search" />
 
