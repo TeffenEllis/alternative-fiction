@@ -90,7 +90,9 @@
   "scripts": {
     "start": "babel-node scripts/watch.js",
     "build": "NODE_ENV=production webpack -p",
-    "deploy": "npm run build && gulp deploy"
+    "deploy": "npm run build && gulp deploy",
+    "lint": "eslint ./app",
+    "lint:fix": "eslint --fix ./app"
   },
   "version": "1.0.0"
 }
