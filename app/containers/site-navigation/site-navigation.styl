@@ -42,19 +42,20 @@ $navigation-width = 150px
   right 0
   bottom 0
 
-#main-content
-  position absolute
-  top 0
+#content-container
+  align-items center
+  background white
+  flex 1 0 auto
   left 0
   min-height 100%
-  z-index priority-medium
-
-  background white
-  width 100%
-
+  padding-top 1em
+  position absolute
+  top 0
   transition-duration 150ms
-  transition-timing-function cubic-bezier(0.2, 0.3, 0.25, 0.9)
   transition-property transform
+  transition-timing-function cubic-bezier(0.2, 0.3, 0.25, 0.9)
+  width 100%
+  z-index priority-medium
 
 body.site-navigation-active
   height 100%
@@ -65,6 +66,6 @@ body.site-navigation-active
     left $navigation-width
     z-index priority-high
 
-  #main-content
+  #content-container
     transform translate3d($navigation-width, 0, 0)
 
