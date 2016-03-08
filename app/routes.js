@@ -2,6 +2,7 @@ import React from "react"
 import Application from "components/application"
 import Authenticate from "containers/authenticate"
 import Contribute from "containers/contribute"
+import Home from "containers/home"
 import Search from "containers/search"
 import Library from "containers/library"
 import * as stories from "containers/stories"
@@ -12,7 +13,7 @@ import {IndexRoute, Route} from "react-router"
 const PassThroughHandler = ({children}) => children
 
 export default (<Route component={Application} path="/">
-  <IndexRoute component={stories.listing} />
+  <IndexRoute component={Home} />
 
   <Route component={Authenticate} path="auth" />
   <Route component={Contribute} path="contribute" />
