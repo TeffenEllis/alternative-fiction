@@ -13,7 +13,7 @@ export default class StoryCard extends Component {
 
       <div className="primary-details" data-selectable>
         Written by&nbsp;
-        <Link className="author" to={`/users/${story.user.uuid}`}>{story.user.username}</Link>
+        <Link className="author" to={`/users/${story.user.uuid}`}>{story.user.displayName}</Link>
         &nbsp;<HumanTime datetime={story.updatedAt} />
       </div>
 

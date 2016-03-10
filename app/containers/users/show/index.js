@@ -32,10 +32,10 @@ export default class UserShow extends Component {
     if (!user || !stories) return <ContentPlaceholder />
 
     return <section data-column data-component="users-show">
-      <div className="headline" data-selectable>{user.username}</div>
+      <div className="headline" data-selectable>{user.displayName}</div>
 
       <div className="bio" data-selectable>
-        {user.bio || `${user.username} hasn't written a bio yet.`}
+        {user.bio || `${user.displayName} hasn't written a bio yet.`}
       </div>
 
       <div className="headline" data-selectable>Stories</div>

@@ -21,20 +21,9 @@ export default function getForms(user) {
     register: [
       {
         autoFocus: true,
-        maxLength: 60,
-        name: "username",
-        pattern: "^[a-zA-Z0-9-_]+$",
-        placeholder: "Username",
-        ref: "primaryField",
-        required: true,
-        title: "Usernames must only contain alpha-numeric characters, underscores, and dashes.",
-        spellCheck: false,
-        type: "text",
-        value: ""
-      },
-      {
         name: "email",
         placeholder: "Email",
+        ref: "primaryField",
         required: true,
         type: "email",
         value: ""
