@@ -18,11 +18,17 @@ class SiteNavigation extends Component {
     router: React.PropTypes.object.isRequired
   };
 
-  _handleNavigation({path, requireAuthentication}) {
+  _handleNavigation({path, requireAuthentication}, event) {
+    this.props.onNavigation()
+
+    if (event) {
+      if (event.button === 1) return
+      event.preventDefault()
+    }
+
     if (requireAuthentication && !this.props.user) path = `/auth?redirectTo=${path}`
 
     this.context.router.push(path)
-    this.props.onNavigation()
   }
 
   _unauthenticate() {
