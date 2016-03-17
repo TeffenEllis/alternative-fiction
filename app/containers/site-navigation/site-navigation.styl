@@ -8,7 +8,7 @@ $navigation-width = 140px
   left 0
   justify-content space-between
   outline none
-  position fixed
+  position absolute
   top 0
   width $navigation-width
 
@@ -44,18 +44,21 @@ $navigation-width = 140px
   right 0
   bottom 0
 
-#content-container
-  align-items center
-  background white
-  flex 1 0 auto
-  left 0
-  min-height 100%
-  padding-top 1em
-  position absolute
-  top 0
+#content-container, [data-component="site-menu"]
   transition-duration 150ms
   transition-property transform
   transition-timing-function cubic-bezier(0.2, 0.3, 0.25, 0.9)
+
+#content-container
+  align-items center
+  background white
+  bottom 0
+  flex 1 0 auto
+  left 0
+  overflow scroll
+  padding-top 1em
+  position absolute
+  top 0
   width 100%
   z-index priority-medium
 
@@ -68,6 +71,6 @@ body.site-navigation-active
     left $navigation-width
     z-index priority-high
 
-  #content-container
+  #content-container, [data-component="site-menu"]
     transform translate3d($navigation-width, 0, 0)
 

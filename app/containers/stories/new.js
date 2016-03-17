@@ -1,28 +1,31 @@
-import request from "lib/request"
+import {branch} from "baobab-react/higher-order"
 import React, {Component} from "react"
 import ContentPlaceholder from "components/content-placeholder"
+import * as editorActions from "resources/tree/actions/editor"
 
-export default class StoriesNew extends Component {
-  state = {
-    story: null
-  };
-
+class StoriesNew extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
 
-  componentDidUpdate() {
-    if (this.state.story) {
-      this.context.router.push(`/stories/${this.state.story.uuid}/edit`)
-    }
+  componentDidMount() {
+    this.props.actions.createStory()
   }
 
-  componentWillMount() {
-    request("stories", {method: "POST"})
-      .then(story => this.setState({story}))
+  componentWillReceiveProps({story}) {
+    if (story) this.context.router.push(`/stories/${story.uuid}/edit`)
   }
 
   render() {
     return <ContentPlaceholder />
   }
 }
+
+export default branch(StoriesNew, {
+  actions: {
+    createStory: editorActions.createStory
+  },
+  cursors: {
+    story: ["editor", "story"]
+  }
+})

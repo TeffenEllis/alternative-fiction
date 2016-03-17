@@ -1,6 +1,8 @@
 {
   "author": "Teffen Ellis",
   "dependencies": {
+    "baobab": "2.3.3",
+    "baobab-react": "1.0.1",
     "bootstrap-styl": "5.0.5",
     "classnames": "2.2.3",
     "html2markdown": "1.1.0",
@@ -10,11 +12,9 @@
     "medium-editor": "5.14.4",
     "moment": "2.11.1",
     "normalize.css": "3.0.3",
-    "react": "0.14.6",
+    "react": "0.14.7",
     "react-dom": "0.14.3",
-    "react-redux": "4.4.0",
     "react-router": "2.0.0-rc5",
-    "redux": "3.3.1",
     "remarkable": "1.6.1",
     "whatwg-fetch": "0.11.0"
   },

@@ -1,23 +1,22 @@
 import "./story.styl"
 
-import React from "react"
+import {branch} from "baobab-react/higher-order"
 import HumanTime from "components/human-time"
 import EstimatedReadingTime from "components/estimated-reading-time"
 import ViewControls from "containers/stories/view-controls"
 import FullscreenToggle from "containers/stories/view-controls/fullscreen-toggle"
 import ReadingPreferences from "containers/stories/view-controls/reading-preferences"
-import userPreferences from "lib/user-preferences"
 import markdown from "lib/markdown"
+import React, {Component} from "react"
 
-export default React.createClass({
+class Story extends Component {
   componentDidMount() {
     // Update body reference for estimated reading time.
     this.forceUpdate()
-  },
+  }
 
   render() {
-    const {fontSize, paragraphWidth} = userPreferences.stories
-    const {story} = this.props
+    const {preferences, story} = this.props
 
     return <section data-column data-component="full-story" data-component-mode="view">
       <ViewControls
@@ -57,14 +56,20 @@ export default React.createClass({
         dangerouslySetInnerHTML={{
           __html: markdown.render(story.body)
         }}
-        data-font-size={fontSize}
+        data-font-size={preferences.fontSize}
         data-selectable
-        data-width={paragraphWidth}
+        data-width={preferences.paragraphWidth}
         ref="body"
       />
 
       <footer className="summary" />
     </section>
+  }
+}
+
+export default branch(Story, {
+  cursors: {
+    preferences: ["preferences"]
   }
 })
 

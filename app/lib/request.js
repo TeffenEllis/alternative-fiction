@@ -1,14 +1,17 @@
-import {get} from "local-preferences"
-import {defaults} from "lodash"
+import {defaultsDeep} from "lodash"
 
 function checkStatus(response) {
   if (response.ok) return response
 
-  const error = new Error(response.statusText)
+  return response
+    .json()
+    .then(responseJSON => {
+      const error = new Error(response.statusText)
 
-  error.response = response
+      Object.assign(error, {response, responseJSON})
 
-  throw error
+      throw error
+    })
 }
 
 export function api(path = "") {
@@ -16,10 +19,9 @@ export function api(path = "") {
 }
 
 export default function request(path = "", options = {}) {
-  defaults(options, {
+  defaultsDeep(options, {
     headers: {
       Accept: "application/json",
-      Authorization: get("token", ""),
       "Content-Type": "application/json"
     }
   })

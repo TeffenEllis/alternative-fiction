@@ -1,10 +1,9 @@
 import "./site-navigation.styl"
 
+import {branch} from "baobab-react/higher-order"
 import navigationItems from "./items"
 import React, {Component} from "react"
-import {connect} from "react-redux"
-import {bindActionCreators} from "redux"
-import * as sessionActionCreators from "store/action-creators/session"
+import * as sessionActions from "resources/tree/actions/session"
 import ListGroupItem from "./list-group-item"
 
 const contribute = {
@@ -18,7 +17,7 @@ class SiteNavigation extends Component {
     router: React.PropTypes.object.isRequired
   };
 
-  _handleNavigation({path, requireAuthentication}, event) {
+  _handleNavigation({path}, event) {
     this.props.onNavigation()
 
     if (event) {
@@ -26,14 +25,11 @@ class SiteNavigation extends Component {
       event.preventDefault()
     }
 
-    if (requireAuthentication && !this.props.user) path = `/auth?redirectTo=${path}`
-
     this.context.router.push(path)
   }
 
   _unauthenticate() {
-    this.props.sessionActions.unauthenticate()
-    this.context.router.push("/")
+    this.props.actions.logout()
     this.props.onNavigation()
   }
 
@@ -76,16 +72,11 @@ class SiteNavigation extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    sessionActions: bindActionCreators(sessionActionCreators, dispatch)
+export default branch(SiteNavigation, {
+  actions: {
+    logout: sessionActions.logout
+  },
+  cursors: {
+    user: ["user"]
   }
-}
-
-function mapStateToProps(state) {
-  return {
-    user: state.session.user
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SiteNavigation)
+})

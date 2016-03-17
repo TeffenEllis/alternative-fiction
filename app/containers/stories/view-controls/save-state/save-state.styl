@@ -3,11 +3,11 @@ json("theme.json")
 [data-component="save-state"]
   border-bottom 2px solid black
 
-  &.unsaved
+  &[data-state="unsaved"]
     border-bottom-color brand-warning
 
-  &.saving
+  &[data-state="saving"]
     border-bottom-color brand-primary
 
-  &.saved
+  &[data-state="saved"]
     border-bottom-color brand-success

@@ -1,4 +1,6 @@
-export default function getForms(user) {
+export default function getForms(previousUser) {
+  previousUser = previousUser || {}
+
   return {
     login: [
       {
@@ -8,7 +10,7 @@ export default function getForms(user) {
         ref: "primaryField",
         required: true,
         type: "email",
-        value: user && user.email || ""
+        value: previousUser.email || ""
       },
       {
         name: "password",

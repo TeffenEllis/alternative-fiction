@@ -14,14 +14,12 @@ export default [
   {
     label: "My Library",
     icon: "book",
-    path: "/library",
-    requireAuthentication: true
+    path: "/library"
   },
 
   {
     label: "Create",
     icon: "file",
-    path: "/stories/new",
-    requireAuthentication: true
+    path: "/stories/new"
   }
 ]

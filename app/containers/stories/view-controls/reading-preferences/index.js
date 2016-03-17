@@ -5,8 +5,9 @@
 
 import "./reading-preferences.styl"
 
-import React from "react"
-import userPreferences from "lib/user-preferences"
+import React, {Component} from "react"
+import {branch} from "baobab-react/higher-order"
+import * as preferencesActions from "resources/tree/actions/preferences"
 
 const preferenceToInt = {
   paragraphWidth: {
@@ -36,16 +37,16 @@ const intToPreference = {
   }
 }
 
-export default React.createClass({
-  handlePreferenceChange(type, {target: {value}}) {
+class ReadingPreferences extends Component {
+
+  _updatePreference(type, {target: {value}}) {
     value = parseInt(value, 10)
 
-    userPreferences.stories[type] = intToPreference[type][value]
-    this.props.storyComponent.forceUpdate()
-  },
+    this.props.actions.setPreference(type, intToPreference[type][value])
+  }
 
   render() {
-    const {paragraphWidth, fontSize} = userPreferences.stories
+    const {paragraphWidth, fontSize} = this.props.preferences
 
     return <div className="view-control" data-column data-component="reading-preferences">
       <div className="preference paragraph-width">
@@ -54,7 +55,7 @@ export default React.createClass({
           className="slider"
           max={2}
           min={0}
-          onChange={this.handlePreferenceChange.bind(this, "paragraphWidth")}
+          onChange={this._updatePreference.bind(this, "paragraphWidth")}
           type="range"
           value={preferenceToInt.paragraphWidth[paragraphWidth]}
         />
@@ -67,12 +68,20 @@ export default React.createClass({
           className="slider"
           max={2}
           min={0}
-          onChange={this.handlePreferenceChange.bind(this, "fontSize")}
+          onChange={this._updatePreference.bind(this, "fontSize")}
           type="range"
           value={preferenceToInt.fontSize[fontSize]}
         />
       </div>
     </div>
   }
-})
+}
 
+export default branch(ReadingPreferences, {
+  actions: {
+    setPreference: preferencesActions.setPreference
+  },
+  cursors: {
+    preferences: ["preferences"]
+  }
+})

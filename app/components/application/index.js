@@ -1,17 +1,23 @@
-import React, {Component} from "react"
+import {root} from "baobab-react/higher-order"
 import SiteMenu from "components/site-menu"
 import SiteNavigation from "containers/site-navigation"
+import React, {Component} from "react"
+import tree from "resources/tree"
+import Flash from "containers/flash"
 
 const NAVIGATION_CLASS = "site-navigation-active"
 
-export default class Application extends Component {
+class Application extends Component {
   render() {
     return <div className="application-root">
       <SiteNavigation onNavigation={this.setNavigationClass.bind(this, "remove")} />
       <aside className="site-navigation-overlay" onClick={this.setNavigationClass.bind(this, "remove")} />
 
+      <SiteMenu onNavigation={this.setNavigationClass.bind(this, "add")} />
+
       <div data-column id="content-container">
-        <SiteMenu onNavigation={this.setNavigationClass.bind(this, "add")} />
+        <Flash />
+
         {this.props.children}
       </div>
     </div>
@@ -21,3 +27,5 @@ export default class Application extends Component {
     document.body.classList[method](NAVIGATION_CLASS)
   }
 }
+
+export default root(Application, tree)

@@ -1,25 +1,23 @@
 import "./authenticate.styl"
 
+import {branch} from "baobab-react/higher-order"
 import React, {Component} from "react"
-import {connect} from "react-redux"
-import {bindActionCreators} from "redux"
-import request from "../../lib/request"
-import * as sessionActionCreators from "store/action-creators/session"
 import getForms from "./get-forms"
+import * as sessionActions from "resources/tree/actions/session"
 
 class Authenticate extends Component {
   constructor(props) {
     super(props)
 
-    const {user} = props
+    const {previousUser} = props
 
     this.$ = {
       _toggleReturningUser: this._toggleReturningUser.bind(this)
     }
 
     this.state = {
-      forms: getForms(user),
-      returningUser: !!user
+      forms: getForms(previousUser),
+      returningUser: !!previousUser
     }
   }
 
@@ -43,30 +41,12 @@ class Authenticate extends Component {
   _handleSubmission(formName, event) {
     event.preventDefault()
 
-    const {location: {query}, sessionActions} = this.props
+    const {actions} = this.props
     const body = {}
-    const endpoint = {
-      login: "auth",
-      register: "users"
-    }[formName]
 
     this.state.forms[formName].forEach(({name, value}) => body[name] = value)
 
-    request(endpoint, {
-      responseHeaders: true,
-      body,
-      method: "POST"
-    })
-    .then(({headers, payload}) => {
-      sessionActions.authenticate({
-        token: headers.get("authorization"),
-        user: payload
-      })
-
-      const {redirectTo = "/"} = query
-
-      this.context.router.push(redirectTo)
-    })
+    actions[formName](body)
   }
 
   _toggleReturningUser() {
@@ -81,6 +61,15 @@ class Authenticate extends Component {
     if (this.state.returningUser === prevState.returningUser) return
 
     this._focusPrimaryField()
+  }
+
+  componentWillReceiveProps({user}) {
+    if (!user) return
+
+    const {location: {query}} = this.props
+    const {redirectTo = "/"} = query
+
+    this.context.router.push(redirectTo)
   }
 
   render() {
@@ -141,17 +130,14 @@ class Authenticate extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    token: state.session.token,
-    user: state.session.user
+export default branch(Authenticate, {
+  actions: {
+    login: sessionActions.login,
+    register: sessionActions.register
+  },
+  cursors: {
+    error: ["containers", "authenticate", "error"],
+    previousUser: ["previousUser"],
+    user: ["user"]
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    sessionActions: bindActionCreators(sessionActionCreators, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Authenticate)
+})
