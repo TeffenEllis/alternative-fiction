@@ -9,6 +9,8 @@ export default class ApplicationError extends Component {
   }
 
   getMessage() {
+    if (this.props.message) return this.props.message
+
     const message = {
       401: () => "The path you've requested is unauthorized.",
       404: () => `The path "${this.props.params.splat}" cannot be found.`,
@@ -19,7 +21,7 @@ export default class ApplicationError extends Component {
   }
 
   getStatusCode() {
-    return this.props.route.props && this.props.route.props.statusCode || 500
+    return this.props.statusCode || this.props.route.props && this.props.route.props.statusCode || 500
   }
 
   render() {
