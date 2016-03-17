@@ -40,20 +40,17 @@ export default class EstimatedReadingTime extends Component {
     if (!this.props.trackScrollPosition) return
 
     this.scrollHandler = this._updateScrollPercentage.bind(this)
+    this.parent = document.querySelector("#content-container")
 
-    document
-      .querySelector("#content-container")
-      .addEventListener("scroll", this.scrollHandler)
+    this.parent.addEventListener("scroll", this.scrollHandler)
   }
 
   componentWillUnmount() {
-    window.removeEventListener(this.scrollHandler)
+    this.parent.removeEventListener("scroll", this.scrollHandler)
   }
 
   _updateScrollPercentage() {
     const element = this.props.textComponent
-
-    this.parent = this.parent || document.querySelector("#content-container")
 
     // Consider the element's offset from the body and the portion visible from the viewport.
     const offsetTop = getOffsetTop(element) - document.documentElement.clientHeight
