@@ -1,3 +1,5 @@
+import "./contribute.styl"
+
 import React, {Component} from "react"
 
 export default class Contribute extends Component {
