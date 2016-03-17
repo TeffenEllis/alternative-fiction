@@ -4,10 +4,11 @@ import ApplicationError from "components/application-error"
 import createAuthenticatedComponent from "components/create-authenticated-component"
 import Authenticate from "containers/authenticate"
 import Contribute from "containers/contribute"
-import Home from "containers/home"
-import Search from "containers/search"
-import Library from "containers/library"
 import Editor from "containers/editor"
+import Home from "containers/home"
+import Library from "containers/library"
+import Search from "containers/search"
+import Settings from "containers/settings"
 import * as stories from "containers/stories"
 import * as users from "containers/users"
 import {IndexRoute, Route} from "react-router"
@@ -21,6 +22,7 @@ export default (<Route component={Application} path="/">
   <Route component={Contribute} path="contribute" />
   <Route component={createAuthenticatedComponent(Library)} path="library" />
   <Route component={Search} path="search" />
+  <Route component={createAuthenticatedComponent(Settings)} path="settings" />
 
   <Route component={PassThroughHandler} path="stories(/)">
     <Route component={createAuthenticatedComponent(stories._new)} path="new" />

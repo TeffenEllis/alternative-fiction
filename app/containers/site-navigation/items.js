@@ -1,6 +1,6 @@
 export default [
   {
-    label: "Stories",
+    label: "Recent",
     icon: "list-alt",
     path: "/"
   },
@@ -19,7 +19,13 @@ export default [
 
   {
     label: "Create",
-    icon: "file",
+    icon: "pencil",
     path: "/stories/new"
+  },
+
+  {
+    label: "Settings",
+    icon: "wrench",
+    path: "/settings"
   }
 ]
