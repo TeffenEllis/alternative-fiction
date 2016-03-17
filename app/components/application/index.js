@@ -5,15 +5,14 @@ import React, {Component} from "react"
 import tree from "resources/tree"
 import Flash from "containers/flash"
 
-const NAVIGATION_CLASS = "site-navigation-active"
 
 class Application extends Component {
   render() {
     return <div className="application-root">
-      <SiteNavigation onNavigation={this.setNavigationClass.bind(this, "remove")} />
-      <aside className="site-navigation-overlay" onClick={this.setNavigationClass.bind(this, "remove")} />
+      <SiteNavigation onNavigation={this.toggleMenuState} />
+      <aside className="site-navigation-overlay" onClick={this.toggleMenuState} />
 
-      <SiteMenu onNavigation={this.setNavigationClass.bind(this, "add")} />
+      <SiteMenu onNavigation={this.toggleMenuState} />
 
       <div data-column id="content-container">
         <Flash />
@@ -23,8 +22,10 @@ class Application extends Component {
     </div>
   }
 
-  setNavigationClass(method) {
-    document.body.classList[method](NAVIGATION_CLASS)
+  toggleMenuState() {
+    const {dataset} = document.body
+
+    dataset.menu = dataset.menu === "visible" ? "hidden" : "visible"
   }
 }
 
