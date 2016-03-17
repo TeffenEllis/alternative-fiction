@@ -101,9 +101,11 @@ class Authenticate extends Component {
   }
 
   renderLogin() {
-    // TODO: Check the user's story count and alter the headline to "writer".
+    const previousUser = this.props.previousUser || {}
+    const displayName = previousUser.displayName || "reader"
+
     return <form className="form" data-column onSubmit={this._handleSubmission.bind(this, "login")}>
-      <div className="headline">Welcome back, reader.</div>
+      <div className="headline">Welcome back, {displayName}.</div>
 
       <div className="action deemphasized" onClick={this.$._toggleReturningUser}>
         I want to create a new account.
