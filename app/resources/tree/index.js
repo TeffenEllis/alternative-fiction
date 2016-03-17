@@ -27,6 +27,16 @@ forEach(PERSISTED_KEYS, (fallback, key) => spec[key] = getPersisted(key, fallbac
 
 const tree = new Baobab(spec)
 
+tree.select("flash").on("update", function({data}) {
+  const [nextEntry] = data.currentData
+
+  if (!nextEntry) return
+
+  setTimeout(() => {
+    this.set(this.get().filter(({id}) => id !== nextEntry.id))
+  }, nextEntry.timeout)
+})
+
 // Store persisted keys in localstorage.
 export function persistTree() {
   const persistedData = pick(tree.toJSON(), Object.keys(PERSISTED_KEYS))
