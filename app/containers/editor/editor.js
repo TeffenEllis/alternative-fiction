@@ -92,6 +92,7 @@ class Editor extends Component {
         <div
           className="description"
           contentEditable
+          data-column
           data-parser="markdown"
           data-placeholder="Description"
           onInput={this._handleChange.bind(this, "description")}

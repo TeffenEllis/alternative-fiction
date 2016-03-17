@@ -40,6 +40,7 @@ class Story extends Component {
           dangerouslySetInnerHTML={{
             __html: markdown.render(story.description)
           }}
+          data-column
           data-selectable
         />
 
