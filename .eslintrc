@@ -145,7 +145,9 @@
     "react/jsx-uses-vars": 1,
     "react/no-danger": 0,
     "react/no-did-update-set-state": 1,
-    "react/no-multi-comp": 1,
+    "react/no-multi-comp": [1, {
+      "ignoreStateless": true
+    }],
     "react/no-set-state": 0,
     "react/no-unknown-property": 1,
     "react/prop-types": 0,
